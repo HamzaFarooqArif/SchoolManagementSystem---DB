@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB11Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="ClassID" Type="int" />
+    <Property Name="CourseName" Type="varchar" MaxLength="50" />
+    <Property Name="AttendanceDate" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Batch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DeptName" Type="varchar" MaxLength="50" />
+    <Property Name="Session" Type="date" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProgName" Type="varchar" MaxLength="50" />
+    <Property Name="BatchID" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Capacity" Type="int" />
+    <Property Name="Strength" Type="int" />
+  </EntityType>
+  <EntityType Name="ClassCourse_MTM">
+    <Key>
+      <PropertyRef Name="ClassID" />
+      <PropertyRef Name="CourseName" />
+    </Key>
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="CourseName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClassExam_MTM">
+    <Key>
+      <PropertyRef Name="ExamID" />
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ExamID" Type="int" Nullable="false" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseResult_MTM">
+    <Key>
+      <PropertyRef Name="CourseName" />
+      <PropertyRef Name="Result" />
+    </Key>
+    <Property Name="CourseName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Result" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="InstituteName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DeptName" Type="varchar" MaxLength="50" />
+    <Property Name="PersonCNIC" Type="varchar" MaxLength="15" />
+    <Property Name="ClassID" Type="int" />
+    <Property Name="Designation" Type="varchar" MaxLength="50" />
+    <Property Name="Salary" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EmployeeClass_MTM">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeCourse_MTM">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="CourseName" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="CourseName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CourseName" Type="varchar" MaxLength="50" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Institute">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="150" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="CNIC" />
+    </Key>
+    <Property Name="CNIC" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="FatherName" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="150" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Program">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DeptName" Type="varchar" MaxLength="50" />
+    <Property Name="FeeDate" Type="datetime" />
+    <Property Name="ClassStartDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Result">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ObtainedMarks" Type="int" />
+    <Property Name="TotalMarks" Type="int" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonCNIC" Type="varchar" MaxLength="15" />
+    <Property Name="ClassID" Type="int" />
+    <Property Name="RegNO" Type="varchar" MaxLength="50" />
+    <Property Name="Fee" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="StudentResult_MTM">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="ResultID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="ResultID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Timetable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseName" Type="varchar" MaxLength="50" />
+    <Property Name="ClassID" Type="int" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="Day" Type="varchar" MaxLength="10" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_BatchClass">
+    <End Role="Batch" Type="Self.Batch" Multiplicity="0..1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Batch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="BatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassAtt">
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassClassCourse">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="ClassCourse_MTM" Type="Self.ClassCourse_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassCourse_MTM">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassClassExam">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="ClassExam_MTM" Type="Self.ClassExam_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassExam_MTM">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassECl">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="EmployeeClass_MTM" Type="Self.EmployeeClass_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeClass_MTM">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassEmp">
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassStu">
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassTT">
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+    <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Timetable">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseAtt">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="CourseName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseClassCourse">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="ClassCourse_MTM" Type="Self.ClassCourse_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="ClassCourse_MTM">
+        <PropertyRef Name="CourseName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseCourseResult">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="CourseResult_MTM" Type="Self.CourseResult_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="CourseResult_MTM">
+        <PropertyRef Name="CourseName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseECo">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="EmployeeCourse_MTM">
+        <PropertyRef Name="CourseName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseExam">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="CourseName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseTT">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Timetable">
+        <PropertyRef Name="CourseName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeptBatch">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Batch">
+        <PropertyRef Name="DeptName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeptEmp">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DeptName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeptProg">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Program" Type="Self.Program" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Program">
+        <PropertyRef Name="DeptName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpECl">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeClass_MTM" Type="Self.EmployeeClass_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeClass_MTM">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpECo">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeCourse_MTM">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpTT">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Timetable">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamClassExam">
+    <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
+    <End Role="ClassExam_MTM" Type="Self.ClassExam_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassExam_MTM">
+        <PropertyRef Name="ExamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstDept">
+    <End Role="Institute" Type="Self.Institute" Multiplicity="0..1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Institute">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="InstituteName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonEmp">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="CNIC" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="PersonCNIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonStu">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="CNIC" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="PersonCNIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProgClass">
+    <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="ProgName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResStuRes">
+    <End Role="Result" Type="Self.Result" Multiplicity="1" />
+    <End Role="StudentResult_MTM" Type="Self.StudentResult_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Result">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentResult_MTM">
+        <PropertyRef Name="ResultID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResultCourseResult">
+    <End Role="Result" Type="Self.Result" Multiplicity="1" />
+    <End Role="CourseResult_MTM" Type="Self.CourseResult_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Result">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseResult_MTM">
+        <PropertyRef Name="Result" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentAtt">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StuStuRes">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentResult_MTM" Type="Self.StudentResult_MTM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentResult_MTM">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB11ModelStoreContainer">
+    <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Batch" EntityType="Self.Batch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassCourse_MTM" EntityType="Self.ClassCourse_MTM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassExam_MTM" EntityType="Self.ClassExam_MTM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseResult_MTM" EntityType="Self.CourseResult_MTM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeClass_MTM" EntityType="Self.EmployeeClass_MTM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeCourse_MTM" EntityType="Self.EmployeeCourse_MTM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Institute" EntityType="Self.Institute" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Result" EntityType="Self.Result" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentResult_MTM" EntityType="Self.StudentResult_MTM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BatchClass" Association="Self.FK_BatchClass">
+      <End Role="Batch" EntitySet="Batch" />
+      <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassAtt" Association="Self.FK_ClassAtt">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassClassCourse" Association="Self.FK_ClassClassCourse">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="ClassCourse_MTM" EntitySet="ClassCourse_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassClassExam" Association="Self.FK_ClassClassExam">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="ClassExam_MTM" EntitySet="ClassExam_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassECl" Association="Self.FK_ClassECl">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="EmployeeClass_MTM" EntitySet="EmployeeClass_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassEmp" Association="Self.FK_ClassEmp">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassStu" Association="Self.FK_ClassStu">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassTT" Association="Self.FK_ClassTT">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Timetable" EntitySet="Timetable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseAtt" Association="Self.FK_CourseAtt">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseClassCourse" Association="Self.FK_CourseClassCourse">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="ClassCourse_MTM" EntitySet="ClassCourse_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseCourseResult" Association="Self.FK_CourseCourseResult">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseResult_MTM" EntitySet="CourseResult_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseECo" Association="Self.FK_CourseECo">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseExam" Association="Self.FK_CourseExam">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Exam" EntitySet="Exam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseTT" Association="Self.FK_CourseTT">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Timetable" EntitySet="Timetable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeptBatch" Association="Self.FK_DeptBatch">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Batch" EntitySet="Batch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeptEmp" Association="Self.FK_DeptEmp">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeptProg" Association="Self.FK_DeptProg">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Program" EntitySet="Program" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpECl" Association="Self.FK_EmpECl">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeClass_MTM" EntitySet="EmployeeClass_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpECo" Association="Self.FK_EmpECo">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpTT" Association="Self.FK_EmpTT">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Timetable" EntitySet="Timetable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamClassExam" Association="Self.FK_ExamClassExam">
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="ClassExam_MTM" EntitySet="ClassExam_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InstDept" Association="Self.FK_InstDept">
+      <End Role="Institute" EntitySet="Institute" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonEmp" Association="Self.FK_PersonEmp">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonStu" Association="Self.FK_PersonStu">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProgClass" Association="Self.FK_ProgClass">
+      <End Role="Program" EntitySet="Program" />
+      <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResStuRes" Association="Self.FK_ResStuRes">
+      <End Role="Result" EntitySet="Result" />
+      <End Role="StudentResult_MTM" EntitySet="StudentResult_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResultCourseResult" Association="Self.FK_ResultCourseResult">
+      <End Role="Result" EntitySet="Result" />
+      <End Role="CourseResult_MTM" EntitySet="CourseResult_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentAtt" Association="Self.FK_StudentAtt">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StuStuRes" Association="Self.FK_StuStuRes">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentResult_MTM" EntitySet="StudentResult_MTM" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
