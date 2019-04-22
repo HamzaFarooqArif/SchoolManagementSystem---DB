@@ -8,34 +8,34 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class BatchController : Controller
+    public class CourseController : Controller
     {
-        // GET: Batch
+        // GET: Course
         public ActionResult Index()
         {
             DB11V2Entities db = new DB11V2Entities();
-            List<Batch> lst = db.Batches.ToList();
-            return View(lst);
+            List<Course> result = db.Courses.ToList();
+            return View(result);
         }
 
-        // GET: Batch/Details/5
+        // GET: Course/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Batch/Create
+        // GET: Course/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Batch/Create
+        // POST: Course/Create
         [HttpPost]
-        public ActionResult Create(BatchViewModels collection)
+        public ActionResult Create(CourseViewModels collection)
         {
-            bool result = BatchAction.Create(collection);
-            if(result)
+            bool result = CourseAction.Create(collection);
+            if (result)
             {
                 ViewBag.color = "green";
                 ViewBag.message = "Batch Added Successfully";
@@ -48,18 +48,18 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        // GET: Batch/Edit/5
+        // GET: Course/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Batch/Edit/5
+        // POST: Course/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, BatchViewModels collection)
+        public ActionResult Edit(int id, CourseViewModels collection)
         {
-            bool result = BatchAction.Edit(id, collection);
-            if(result)
+            bool result = CourseAction.Edit(id, collection);
+            if (result)
             {
                 return RedirectToAction("Index");
             }
@@ -71,27 +71,24 @@ namespace WebApplication1.Controllers
             }
         }
 
-        // GET: Batch/Delete/5
+        // GET: Course/Delete/5
         public ActionResult Delete(int id)
         {
-            DB11V2Entities db = new DB11V2Entities();
-            Batch bt = db.Batches.Where(b => b.ID == id).FirstOrDefault();
-            return View(bt);
+            return View();
         }
 
-        // POST: Batch/Delete/5
+        // POST: Course/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            bool result = BatchAction.Delete(id);
-            if (result)
+            try
             {
+                // TODO: Add delete logic here
+
                 return RedirectToAction("Index");
             }
-            else
+            catch
             {
-                ViewBag.color = "red";
-                ViewBag.message = "Batch Already Exists";
                 return View();
             }
         }

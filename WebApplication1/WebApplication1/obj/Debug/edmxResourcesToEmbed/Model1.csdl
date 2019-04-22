@@ -130,6 +130,16 @@
     <NavigationProperty Name="Results" Relationship="Self.FK_StudentResult" FromRole="Student" ToRole="Result" />
     <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterStudent" FromRole="Student" ToRole="Semester" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="Timeslot">
     <Key>
       <PropertyRef Name="ID" />
@@ -423,7 +433,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DB11V2Entities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB11V2Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Attendances" EntityType="Self.Attendance" />
     <EntitySet Name="Batches" EntityType="Self.Batch" />
     <EntitySet Name="Courses" EntityType="Self.Course" />
@@ -435,6 +445,7 @@
     <EntitySet Name="Results" EntityType="Self.Result" />
     <EntitySet Name="Semesters" EntityType="Self.Semester" />
     <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Timeslots" EntityType="Self.Timeslot" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />
     <EntitySet Name="TimetableTimeslot_MTM" EntityType="Self.TimetableTimeslot_MTM" />

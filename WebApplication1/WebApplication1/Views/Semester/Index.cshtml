@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="form-group">
+    @*@Html.LabelFor(model => model.schoolName, htmlAttributes: new { @class = "control-label col-md-2 required", style = "width: auto; position: relative; left: 17%;" })*@
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            --Select Batch--
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">Item1</a></li>
+            <li><a href="#">Item2</a></li>
+            <li><a href="#">Item3</a></li>
+        </ul>
+    </div>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            --Select Semester--
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">Item1</a></li>
+            <li><a href="#">Item2</a></li>
+            <li><a href="#">Item3</a></li>
+        </ul>
+    </div>
+    <input type="submit" value="Show Courses" class="btn btn-default" />
+</div>
+<p>
+    @Html.ActionLink("Add New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Session)*@
+            Course Name
+        </th>
+        <th></th>
+    </tr>
+
+@*@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Session)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}*@
+
+</table>
