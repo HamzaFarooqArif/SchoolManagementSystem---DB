@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
         // GET: Course
         public ActionResult Index()
         {
-            DB11V2Entities db = new DB11V2Entities();
+            DB11V2Entities1 db = new DB11V2Entities1();
             List<Course> result = db.Courses.ToList();
             return View(result);
         }

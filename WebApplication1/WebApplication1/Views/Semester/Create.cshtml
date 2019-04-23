@@ -3,55 +3,52 @@
 @{
     ViewBag.Title = "Create";
 }
+
+
+
 <h2>Create</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        <select id="Batch" class="form-control" style="float: left;">
+        @Html.ActionLink("Create New", "Create", "Batch")
+        @*<div class="dropdown">
+
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                --Select Course--
+                <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu">
+                <li><a href="#">Item1</a></li>
+                <li><a href="#">Item2</a></li>
+                <li><a href="#">Item3</a></li>
+            </ul>
+        </div>*@
+        <select id="Batch" class="form-control">
             <option></option>
         </select>
-        @Html.ActionLink("Create New", "Create", "Batch")
+        <br>
         <select id="Semester" class="form-control">
+            <option></option>
+        </select>
+        <br />
+        <select id="Course" class="form-control">
             <option></option>
         </select>
         <div class="form-group">
             <div class="col-md-10">
-                <input id="btnSubmit" type="button" value="Submit" class="btn btn-default" />
-                @*<input type="submit" value="Load Products" name="btn" class="btn btn-default" />*@
+                <input type="submit" value="Submit" class="btn btn-default" />
             </div>
         </div>
     </div>
-
-    <table class="table" id="courseTable">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-
-        @*@foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Session)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-        }*@
-
-    </table>
-    <p id="para"></p>
 }
+
+
 @section Scripts{
     <script type="text/javascript">
-        $(document).ready(function (e) {
+        $(document).ready(function (e){
             var d = {};
             d.url = '@Url.Action("LoadBatches", "Semester")';
             d.type = "POST";
@@ -67,12 +64,29 @@
             $.ajax(d);
         });
     </script>
+<script type="text/javascript">
+        $(document).ready(function (e){
+            var d = {};
+            d.url = '@Url.Action("LoadCourses", "Semester")';
+            d.type = "POST";
+            d.dataType = "json";
+            d.contentType = "application/json";
+            d.success = function (r) {
+                $("#Course").empty();
+                $("#Course").prepend("option value='' selected='selected'></option>");
+                for (var i = 0; i < r.length; i++) {
+                    $("#Course").append('<option value="' + r[i].ID + '">' + r[i].Name + '</option>');
+                }
+            };
+            $.ajax(d);
+        });
+</script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#Batch").change(function () {
                 debugger;
                 event.preventDefault();
-                //var selectedValue = $("#Batch").select();
+                var selectedValue = $("#Batch").select();
                 var $url = '/Semester/LoadSemester';
                 //alert($url);
 
@@ -80,10 +94,7 @@
                     url: $url,
                     type: 'POST',
                     datatype: "json",
-                    data: jQuery.param({
-                        item: $("#Batch option:selected").val(),
-                    }),
-                   // data: "Item=" + $("#Batch option:selected").val(),
+                    data: "Item=" + $("#Batch option:selected").val(),
                     success: function (r) {
                         $("#Semester").empty();
                         $("#Semester").prepend("option value='' selected='selected'></option>");
@@ -95,51 +106,4 @@
             });
         });
     </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#btnSubmit").click(function () {
-                debugger;
-                event.preventDefault();
-                //var selectedValue = $("#Batch").select();
-                var $url = '/Semester/LoadSemesterCourses';
-                //alert($url);
-
-                $.ajax({
-                    url: $url,
-                    type: 'POST',
-                    datatype: "json",
-                    data: jQuery.param({
-                        semesterID: $("#Semester option:selected").val()
-                    }),
-                    success: function (r) {
-                        $("#courseTable tr").remove();
-                        for (var i = 0; i < r.length; i++)
-                        {
-                            $("#courseTable").append(
-                                "<tr>" +
-                                "<td>"+r[i].Name+"</td>" +
-                                "<td><a href=/Semester/Edit/"+r[i].ID+">Edit</a></td>" +
-                                "</tr>"
-                                );                           
-                        }
-                    }
-                });
-            });
-        });
-</script>
-
 }
-
-@*@foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Session)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }*@

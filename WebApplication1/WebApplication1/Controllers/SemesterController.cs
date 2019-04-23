@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebApplication1.Classes;
 
 namespace WebApplication1.Controllers
 {
@@ -12,7 +10,7 @@ namespace WebApplication1.Controllers
     {
         public JsonResult LoadBatches()
         {
-            DB11V2Entities db = new DB11V2Entities();
+            DB11V2Entities1 db = new DB11V2Entities1();
             //IEnumerable<GetProducts_Result> res = db.GetProducts();
             List<Batch> res = db.Batches.ToList();
             return Json(res.Select(x => new
@@ -24,7 +22,7 @@ namespace WebApplication1.Controllers
 
         public JsonResult LoadSemester(int item)
         {
-            DB11V2Entities db = new DB11V2Entities();
+            DB11V2Entities1 db = new DB11V2Entities1();
             //IEnumerable<GetProducts_Result> res = db.GetProducts();
             List<Semester> res = db.Semesters.Where(s=>s.BatchID == item).ToList();
             return Json(res.Select(x => new
@@ -34,26 +32,19 @@ namespace WebApplication1.Controllers
             }));
         }
 
-        public JsonResult LoadSemesterCourses(int semesterID)
-        {
-            //IEnumerable<GetProducts_Result> res = db.GetProducts();
-            List<Course> courseList = new List<Course>();
-            SqlDataReader reader;
-            string cmd = "SELECT * FROM Course WHERE Course.ID IN (SELECT CourseID FROM CourseSemester_MTM WHERE SemesterID = "+semesterID+")";
-            reader = dbConnection.getInstance().getData(cmd);
-            while(reader.Read())
-            {
-                Course c = new Course();
-                c.ID = reader.GetInt32(0);
-                c.Name = reader.GetString(1);
-                courseList.Add(c);
-            }
-            return Json(courseList.Select(x => new
-            {
-                ID = x.ID,
-                Name = x.Name
-            }));
-        }
+
+        //public JsonResult LoadCourses()
+        //{
+        //    DB11V2Entities1 db = new DB11V2Entities1();
+        //    //IEnumerable<GetProducts_Result> res = db.GetProducts();
+        //    List<Course> c = db.Courses.ToList();
+        //   // List<Batch> res = db.Batches.ToList();
+        //    return Json(c.Select(x => new
+        //    {
+        //        ID = x.ID,
+        //        Name = x.Name
+        //    }));
+        //}
         // GET: Semester
         public ActionResult Index()
         {
@@ -69,7 +60,7 @@ namespace WebApplication1.Controllers
         // GET: Semester/Create
         public ActionResult Create()
         {
-            DB11V2Entities db = new DB11V2Entities();
+            DB11V2Entities1 db = new DB11V2Entities1();
 
             return View(db.Courses.ToList());
         }

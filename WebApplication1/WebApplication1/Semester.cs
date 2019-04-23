@@ -25,7 +25,7 @@ namespace WebApplication1
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public int BatchID { get; set; }
+        public Nullable<int> BatchID { get; set; }
     
         public virtual Batch Batch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
