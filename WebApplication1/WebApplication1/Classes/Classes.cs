@@ -9,15 +9,17 @@ namespace WebApplication1.Classes
 
     public class StudentAction
     {
-        public static bool Create(int BatchID, int SemesterID,StudentViewModels std)
+        public static bool Create(StudentViewModels std)
         {
             DB11V2Entities1 db = new DB11V2Entities1();
             Person p = new Person();
             Student c = new Student();
             //c.BatchID = db.Batches.Where(b => b.ID == BatchID).FirstOrDefault().ID;
             //c.SemesterID= db.Semesters.Where(b => b.BatchID == c.BatchID).FirstOrDefault().ID;
-            c.BatchID = BatchID;
-            c.SemesterID = SemesterID;
+            // c.BatchID = BatchID;
+            // c.SemesterID = SemesterID;
+            c.BatchID = std.Batch;
+            c.SemesterID = std.Semester;
             p.Name = std.Name;
             p.FatherName = std.FatherName;
             p.CNIC = std.CNIC;
@@ -25,7 +27,7 @@ namespace WebApplication1.Classes
             p.Address = std.Address;
             c.RegNo = std.RegNo;
             c.Fee = std.Fee;
-            if (!db.People.Any(b => b.CNIC.Equals(p.CNIC)) || !db.Students.Any(b => b.RegNo.Equals(c.RegNo)))
+            if (!db.People.Any(b => b.CNIC.Equals(p.CNIC)) && !db.Students.Any(b => b.RegNo.Equals(c.RegNo)))
             {
                 db.Students.Add(c);
                 db.People.Add(p);
@@ -35,6 +37,25 @@ namespace WebApplication1.Classes
             return false;
 
 
+        }
+
+        public static bool Edit(int id, StudentViewModels student)
+        {
+            DB11V2Entities1 db = new DB11V2Entities1();
+            db.People.Find(id).Name = student.Name;
+            db.People.Find(id).CNIC = student.CNIC;
+            db.People.Find(id).Address = student.Address;
+            db.People.Find(id).Contact = student.Contact;
+            db.Students.Find(id).RegNo = student.RegNo;
+            db.Students.Find(id).Fee = student.Fee;
+            db.Students.Find(id).BatchID = student.Batch;
+            db.Students.Find(id).SemesterID = student.Semester;
+            if(!db.People.Any(b=>b.CNIC == student.CNIC) && !db.Students.Any(b=>b.RegNo == student.RegNo))
+            {
+                db.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 

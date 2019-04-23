@@ -23,7 +23,6 @@ namespace WebApplication1
     
         public int PersonID { get; set; }
         public Nullable<int> SemesterID { get; set; }
-        public Nullable<int> EmployeeCourseID { get; set; }
         public Nullable<int> BatchID { get; set; }
         public string RegNo { get; set; }
         public string Fee { get; set; }
@@ -31,7 +30,6 @@ namespace WebApplication1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual Batch Batch { get; set; }
-        public virtual EmployeeCourse_MTM EmployeeCourse_MTM { get; set; }
         public virtual Person Person { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Result> Results { get; set; }

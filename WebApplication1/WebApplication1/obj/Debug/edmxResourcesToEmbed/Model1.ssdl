@@ -91,7 +91,6 @@
     </Key>
     <Property Name="PersonID" Type="int" Nullable="false" />
     <Property Name="SemesterID" Type="int" />
-    <Property Name="EmployeeCourseID" Type="int" />
     <Property Name="BatchID" Type="int" />
     <Property Name="RegNo" Type="varchar" MaxLength="20" />
     <Property Name="Fee" Type="varchar" MaxLength="20" />
@@ -210,18 +209,6 @@
       </Principal>
       <Dependent Role="EmployeeSemester_MTM">
         <PropertyRef Name="EmployeeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_EmployeeCourseStudent">
-    <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="0..1" />
-    <End Role="Student" Type="Self.Student" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeeCourse_MTM">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Student">
-        <PropertyRef Name="EmployeeCourseID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -424,10 +411,6 @@
     <AssociationSet Name="FK_EmployeeCourseResult" Association="Self.FK_EmployeeCourseResult">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="EmployeeSemester_MTM" EntitySet="EmployeeSemester_MTM" />
-    </AssociationSet>
-    <AssociationSet Name="FK_EmployeeCourseStudent" Association="Self.FK_EmployeeCourseStudent">
-      <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
-      <End Role="Student" EntitySet="Student" />
     </AssociationSet>
     <AssociationSet Name="FK_EmployeeCourseTimeslot" Association="Self.FK_EmployeeCourseTimeslot">
       <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />

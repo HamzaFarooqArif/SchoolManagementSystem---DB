@@ -101,7 +101,6 @@
         <MappingFragment StoreEntitySet="Student">
           <ScalarProperty Name="PersonID" ColumnName="PersonID" />
           <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
-          <ScalarProperty Name="EmployeeCourseID" ColumnName="EmployeeCourseID" />
           <ScalarProperty Name="BatchID" ColumnName="BatchID" />
           <ScalarProperty Name="RegNo" ColumnName="RegNo" />
           <ScalarProperty Name="Fee" ColumnName="Fee" />
