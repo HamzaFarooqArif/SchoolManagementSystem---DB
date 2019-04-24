@@ -91,9 +91,20 @@
     </Key>
     <Property Name="PersonID" Type="int" Nullable="false" />
     <Property Name="SemesterID" Type="int" />
+    <Property Name="EmployeeCourseID" Type="int" />
     <Property Name="BatchID" Type="int" />
     <Property Name="RegNo" Type="varchar" MaxLength="20" />
     <Property Name="Fee" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Timeslot">
     <Key>
@@ -209,6 +220,18 @@
       </Principal>
       <Dependent Role="EmployeeSemester_MTM">
         <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeCourseStudent">
+    <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeCourse_MTM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="EmployeeCourseID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -380,6 +403,7 @@
     <EntitySet Name="Result" EntityType="Self.Result" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Timeslot" EntityType="Self.Timeslot" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TimetableTimeslot_MTM" EntityType="Self.TimetableTimeslot_MTM" Schema="dbo" store:Type="Tables" />
@@ -411,6 +435,10 @@
     <AssociationSet Name="FK_EmployeeCourseResult" Association="Self.FK_EmployeeCourseResult">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="EmployeeSemester_MTM" EntitySet="EmployeeSemester_MTM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeCourseStudent" Association="Self.FK_EmployeeCourseStudent">
+      <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
+      <End Role="Student" EntitySet="Student" />
     </AssociationSet>
     <AssociationSet Name="FK_EmployeeCourseTimeslot" Association="Self.FK_EmployeeCourseTimeslot">
       <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />

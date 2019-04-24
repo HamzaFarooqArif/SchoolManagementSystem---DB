@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
         // GET: Course
         public ActionResult Index()
         {
-            DB11V2Entities1 db = new DB11V2Entities1();
+            DB11V2Entities db = new DB11V2Entities();
             List<Course> result = db.Courses.ToList();
             return View(result);
         }
@@ -51,7 +51,13 @@ namespace WebApplication1.Controllers
         // GET: Course/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            DB11V2Entities db = new DB11V2Entities();
+            Course cr = db.Courses.Where(c => c.ID == id).FirstOrDefault();
+
+            CourseViewModels crm = new CourseViewModels();
+            crm.CourseName = cr.Name;
+
+            return View(crm);
         }
 
         // POST: Course/Edit/5
@@ -74,21 +80,28 @@ namespace WebApplication1.Controllers
         // GET: Course/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            DB11V2Entities db = new DB11V2Entities();
+            Course cr = db.Courses.Where(c => c.ID == id).FirstOrDefault();
+
+            CourseViewModels crm = new CourseViewModels();
+            crm.CourseName = cr.Name;
+
+            return View(crm);
         }
 
         // POST: Course/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
+            bool result = CourseAction.Delete(id);
+            if (result)
             {
-                // TODO: Add delete logic here
-
                 return RedirectToAction("Index");
             }
-            catch
+            else
             {
+                ViewBag.color = "red";
+                ViewBag.message = "Invalid input";
                 return View();
             }
         }

@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
         // GET: Batch
         public ActionResult Index()
         {
-            DB11V2Entities1 db = new DB11V2Entities1();
+            DB11V2Entities db = new DB11V2Entities();
             List<Batch> lst = db.Batches.ToList();
             return View(lst);
         }
@@ -51,7 +51,11 @@ namespace WebApplication1.Controllers
         // GET: Batch/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            DB11V2Entities db = new DB11V2Entities();
+            BatchViewModels bt = new BatchViewModels();
+            bt.BatchName = db.Batches.Where(b => b.ID == id).FirstOrDefault().Session;
+            
+            return View(bt);
         }
 
         // POST: Batch/Edit/5
@@ -74,7 +78,7 @@ namespace WebApplication1.Controllers
         // GET: Batch/Delete/5
         public ActionResult Delete(int id)
         {
-            DB11V2Entities1 db = new DB11V2Entities1();
+            DB11V2Entities db = new DB11V2Entities();
             Batch bt = db.Batches.Where(b => b.ID == id).FirstOrDefault();
             return View(bt);
         }
@@ -83,18 +87,17 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            //bool result = BatchAction.Delete(id);
-            //if (result)
-            //{
-            //    return RedirectToAction("Index");
-            //}
-            //else
-            //{
-            //    ViewBag.color = "red";
-            //    ViewBag.message = "Batch Already Exists";
-            //    return View();
-            //}
-            return View();
+            bool result = BatchAction.Delete(id);
+            if (result)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.color = "red";
+                ViewBag.message = "Invalid input";
+                return View();
+            }
         }
     }
 }

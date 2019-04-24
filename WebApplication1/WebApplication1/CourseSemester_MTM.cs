@@ -22,8 +22,8 @@ namespace WebApplication1
         }
     
         public int ID { get; set; }
-        public Nullable<int> CourseID { get; set; }
-        public Nullable<int> SemesterID { get; set; }
+        public int CourseID { get; set; }
+        public int SemesterID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }

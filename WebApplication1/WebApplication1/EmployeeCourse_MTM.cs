@@ -17,6 +17,7 @@ namespace WebApplication1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EmployeeCourse_MTM()
         {
+            this.Students = new HashSet<Student>();
             this.Timeslots = new HashSet<Timeslot>();
         }
     
@@ -26,6 +27,8 @@ namespace WebApplication1
     
         public virtual Course Course { get; set; }
         public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student> Students { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Timeslot> Timeslots { get; set; }
     }

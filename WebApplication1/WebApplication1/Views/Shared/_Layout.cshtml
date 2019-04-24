@@ -71,7 +71,7 @@
                     </div><!-- .container-fluid -->
                 </div><!-- .top-header-bar -->*@
 
-            <div class="nav-bar">
+            <div class="nav-bar" @*style="padding-top: 0px; padding-bottom: 0px;"*@>
                 <div class="container">
                     <div class="row">
                         <div class="col-9 col-lg-3">
@@ -83,13 +83,31 @@
                         <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
                             <nav class="site-navigation flex justify-content-end align-items-center">
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                    <li class="current-menu-item"><a href="index.html">Home</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Courses</a></li>
+                                    <li class="current-menu-item"><a href="/Home">Home</a></li>
+                                    <li><a href="Home/About">About</a></li>
+                                    <li><a href="/Course">Courses</a></li>
                                     <li><a href="#">blog</a></li>
                                     <li><a href="#">Contact</a></li>
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" href="#">Links</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/Batch">Batch</a></li>
+                                            <li><a href="/Course">Course</a></li>
+                                            <li><a href="/Semester">Semester</a></li>
+                                            <li><a href="/Employee">Employee</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
-
+                                @*<div class="dropdown">
+                                    <button class="btn btn-primary-outline dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dropdown button
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>*@
                                 <div class="hamburger-menu d-lg-none">
                                     <span></span>
                                     <span></span>
@@ -128,8 +146,6 @@
                 </div>
             </div>*@
         <div class="container body-content contentA">
-            <br />
-            <br />
             @RenderBody()
             <hr />
         </div>

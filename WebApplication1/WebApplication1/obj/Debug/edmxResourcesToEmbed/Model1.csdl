@@ -62,6 +62,7 @@
     <Property Name="CourseID" Type="Int32" />
     <NavigationProperty Name="Course" Relationship="Self.FK_CourseEmployeeCourse" FromRole="EmployeeCourse_MTM" ToRole="Course" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeEmployeeCourse" FromRole="EmployeeCourse_MTM" ToRole="Employee" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_EmployeeCourseStudent" FromRole="EmployeeCourse_MTM" ToRole="Student" />
     <NavigationProperty Name="Timeslots" Relationship="Self.FK_EmployeeCourseTimeslot" FromRole="EmployeeCourse_MTM" ToRole="Timeslot" />
   </EntityType>
   <EntityType Name="EmployeeSemester_MTM">
@@ -118,14 +119,26 @@
     </Key>
     <Property Name="PersonID" Type="Int32" Nullable="false" />
     <Property Name="SemesterID" Type="Int32" />
+    <Property Name="EmployeeCourseID" Type="Int32" />
     <Property Name="BatchID" Type="Int32" />
     <Property Name="RegNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Fee" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Attendances" Relationship="Self.FK_StudentAttendance" FromRole="Student" ToRole="Attendance" />
     <NavigationProperty Name="Batch" Relationship="Self.FK_BatchStudent" FromRole="Student" ToRole="Batch" />
+    <NavigationProperty Name="EmployeeCourse_MTM" Relationship="Self.FK_EmployeeCourseStudent" FromRole="Student" ToRole="EmployeeCourse_MTM" />
     <NavigationProperty Name="Person" Relationship="Self.FK_PersonStudent" FromRole="Student" ToRole="Person" />
     <NavigationProperty Name="Results" Relationship="Self.FK_StudentResult" FromRole="Student" ToRole="Result" />
     <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterStudent" FromRole="Student" ToRole="Semester" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Timeslot">
     <Key>
@@ -300,6 +313,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EmployeeCourseStudent">
+    <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeCourse_MTM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="EmployeeCourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EmployeeCourseTimeslot">
     <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="0..1" />
     <End Role="Timeslot" Type="Self.Timeslot" Multiplicity="*" />
@@ -408,7 +433,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DB11V2Entities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB11V2Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Attendances" EntityType="Self.Attendance" />
     <EntitySet Name="Batches" EntityType="Self.Batch" />
     <EntitySet Name="Courses" EntityType="Self.Course" />
@@ -420,6 +445,7 @@
     <EntitySet Name="Results" EntityType="Self.Result" />
     <EntitySet Name="Semesters" EntityType="Self.Semester" />
     <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Timeslots" EntityType="Self.Timeslot" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />
     <EntitySet Name="TimetableTimeslot_MTM" EntityType="Self.TimetableTimeslot_MTM" />
@@ -467,6 +493,10 @@
     <AssociationSet Name="FK_PersonEmployee" Association="Self.FK_PersonEmployee">
       <End Role="Person" EntitySet="People" />
       <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeCourseStudent" Association="Self.FK_EmployeeCourseStudent">
+      <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
+      <End Role="Student" EntitySet="Students" />
     </AssociationSet>
     <AssociationSet Name="FK_EmployeeCourseTimeslot" Association="Self.FK_EmployeeCourseTimeslot">
       <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
