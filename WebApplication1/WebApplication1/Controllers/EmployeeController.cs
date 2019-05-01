@@ -13,28 +13,9 @@ namespace WebApplication1.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            DB11V2Entities db = new DB11V2Entities();
+            DB11V2Entities1 db = new DB11V2Entities1();
 
-            List<Employee> employeeList = db.Employees.ToList();
-            List<PersonEmployeeViewModels> personEmployeeList = new List<PersonEmployeeViewModels>();
-
-            foreach (Employee e in employeeList)
-            {
-                PersonEmployeeViewModels pe = new PersonEmployeeViewModels();
-                pe.ID = e.PersonID;
-                pe.Designation = e.Designation;
-                pe.Salary = e.Salary;
-
-                Person pr = db.People.Where(p => p.ID == e.PersonID).FirstOrDefault();
-                pe.Name = pr.Name;
-                pe.FatherName = pr.FatherName;
-                pe.CNIC = pr.CNIC;
-                pe.Address = pr.Address;
-                pe.Contact = pr.Contact;
-
-                personEmployeeList.Add(pe);
-            }
-            return View(personEmployeeList);
+            return View();
         }
 
         // GET: Employee/Details/5
@@ -51,24 +32,29 @@ namespace WebApplication1.Controllers
 
         // POST: Employee/Create
         [HttpPost]
-        public ActionResult Create(PersonEmployeeViewModels collection)
+        public ActionResult Create(EmployeeViewModels collection)
         {
-            if (!ModelState.IsValid) return View();
-            int result = EmployeeAction.Create(collection);
-            if (result == 1)
+            try
             {
-                return RedirectToAction("Index");
-            }
-            else if(result == -1)
-            {
-                ViewBag.color = "red";
-                ViewBag.message = "Employee Already Exists";
+                bool result = EmployeeAction.Create(collection);
+                if (result)
+                {
+                    ViewBag.color = "green";
+                    ViewBag.message = "Employee Added Successfully";
+                    ModelState.Clear();
+                }
+                else
+                {
+                    ViewBag.color = "red";
+                    ViewBag.message = "Employee Already Exists";
+                }
+
                 return View();
+
+                
             }
-            else
+            catch
             {
-                ViewBag.color = "red";
-                ViewBag.message = "Student Already Exists";
                 return View();
             }
         }
@@ -76,36 +62,21 @@ namespace WebApplication1.Controllers
         // GET: Employee/Edit/5
         public ActionResult Edit(int id)
         {
-            DB11V2Entities db = new DB11V2Entities();
-            PersonEmployeeViewModels pe = new PersonEmployeeViewModels();
-
-            Person pr = db.People.Where(p => p.ID == id).FirstOrDefault();
-            pe.Name = pr.Name;
-            pe.FatherName = pr.FatherName;
-            pe.CNIC = pr.CNIC;
-            pe.Address = pr.Address;
-            pe.Contact = pr.Contact;
-
-            Employee em = db.Employees.Where(e=>e.PersonID == id).FirstOrDefault();
-            pe.Designation = em.Designation;
-            pe.Salary = em.Salary;
-
-            return View(pe);
+            return View();
         }
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, PersonEmployeeViewModels collection)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            bool result = EmployeeAction.Edit(id, collection);
-            if (result)
+            try
             {
+                // TODO: Add update logic here
+
                 return RedirectToAction("Index");
             }
-            else
+            catch
             {
-                ViewBag.color = "red";
-                ViewBag.message = "Person CNIC Already Exists";
                 return View();
             }
         }

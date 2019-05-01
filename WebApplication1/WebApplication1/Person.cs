@@ -11,14 +11,24 @@ namespace WebApplication1
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Person
     {
         public int ID { get; set; }
+        [Required]
+        [RegularExpression("^[0-9]{13}$", ErrorMessage ="Enter Valid CNIC")]
         public string CNIC { get; set; }
+        [Required]
+        [RegularExpression("[a-zA-Z]*$", ErrorMessage ="Enter Valid Name")]
         public string Name { get; set; }
+        [Required]
+        [RegularExpression("[a-zA-Z]*$", ErrorMessage = "Enter Valid Name")]
         public string FatherName { get; set; }
         public string Address { get; set; }
+
+        [Required]
+        [RegularExpression("^[0-9]{11}$", ErrorMessage = "Enter Valid Conact")]
         public string Contact { get; set; }
     
         public virtual Employee Employee { get; set; }

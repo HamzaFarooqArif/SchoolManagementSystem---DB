@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
         // GET: Course
         public ActionResult Index()
         {
-            DB11V2Entities db = new DB11V2Entities();
+            DB11V2Entities1 db = new DB11V2Entities1();
             List<Course> result = db.Courses.ToList();
             return View(result);
         }
@@ -34,7 +34,8 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Create(CourseViewModels collection)
         {
-            bool result = CourseAction.Create(collection);
+             
+           bool result = CourseAction.Create(collection);
             if (result)
             {
                 ViewBag.color = "green";
@@ -51,13 +52,7 @@ namespace WebApplication1.Controllers
         // GET: Course/Edit/5
         public ActionResult Edit(int id)
         {
-            DB11V2Entities db = new DB11V2Entities();
-            Course cr = db.Courses.Where(c => c.ID == id).FirstOrDefault();
-
-            CourseViewModels crm = new CourseViewModels();
-            crm.CourseName = cr.Name;
-
-            return View(crm);
+            return View();
         }
 
         // POST: Course/Edit/5
@@ -80,28 +75,21 @@ namespace WebApplication1.Controllers
         // GET: Course/Delete/5
         public ActionResult Delete(int id)
         {
-            DB11V2Entities db = new DB11V2Entities();
-            Course cr = db.Courses.Where(c => c.ID == id).FirstOrDefault();
-
-            CourseViewModels crm = new CourseViewModels();
-            crm.CourseName = cr.Name;
-
-            return View(crm);
+            return View();
         }
 
         // POST: Course/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            bool result = CourseAction.Delete(id);
-            if (result)
+            try
             {
+                // TODO: Add delete logic here
+
                 return RedirectToAction("Index");
             }
-            else
+            catch
             {
-                ViewBag.color = "red";
-                ViewBag.message = "Invalid input";
                 return View();
             }
         }

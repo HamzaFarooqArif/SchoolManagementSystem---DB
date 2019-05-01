@@ -96,20 +96,9 @@
           </Key>
           <Property Name="PersonID" Type="int" Nullable="false" />
           <Property Name="SemesterID" Type="int" />
-          <Property Name="EmployeeCourseID" Type="int" />
           <Property Name="BatchID" Type="int" />
           <Property Name="RegNo" Type="varchar" MaxLength="20" />
           <Property Name="Fee" Type="varchar" MaxLength="20" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Timeslot">
           <Key>
@@ -225,18 +214,6 @@
             </Principal>
             <Dependent Role="EmployeeSemester_MTM">
               <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeCourseStudent">
-          <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmployeeCourse_MTM">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="EmployeeCourseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -408,7 +385,6 @@
           <EntitySet Name="Result" EntityType="Self.Result" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Timeslot" EntityType="Self.Timeslot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimetableTimeslot_MTM" EntityType="Self.TimetableTimeslot_MTM" Schema="dbo" store:Type="Tables" />
@@ -440,10 +416,6 @@
           <AssociationSet Name="FK_EmployeeCourseResult" Association="Self.FK_EmployeeCourseResult">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="EmployeeSemester_MTM" EntitySet="EmployeeSemester_MTM" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeCourseStudent" Association="Self.FK_EmployeeCourseStudent">
-            <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
-            <End Role="Student" EntitySet="Student" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeCourseTimeslot" Association="Self.FK_EmployeeCourseTimeslot">
             <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
@@ -565,7 +537,6 @@
           <Property Name="CourseID" Type="Int32" />
           <NavigationProperty Name="Course" Relationship="Self.FK_CourseEmployeeCourse" FromRole="EmployeeCourse_MTM" ToRole="Course" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeEmployeeCourse" FromRole="EmployeeCourse_MTM" ToRole="Employee" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_EmployeeCourseStudent" FromRole="EmployeeCourse_MTM" ToRole="Student" />
           <NavigationProperty Name="Timeslots" Relationship="Self.FK_EmployeeCourseTimeslot" FromRole="EmployeeCourse_MTM" ToRole="Timeslot" />
         </EntityType>
         <EntityType Name="EmployeeSemester_MTM">
@@ -622,26 +593,14 @@
           </Key>
           <Property Name="PersonID" Type="Int32" Nullable="false" />
           <Property Name="SemesterID" Type="Int32" />
-          <Property Name="EmployeeCourseID" Type="Int32" />
           <Property Name="BatchID" Type="Int32" />
           <Property Name="RegNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fee" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_StudentAttendance" FromRole="Student" ToRole="Attendance" />
           <NavigationProperty Name="Batch" Relationship="Self.FK_BatchStudent" FromRole="Student" ToRole="Batch" />
-          <NavigationProperty Name="EmployeeCourse_MTM" Relationship="Self.FK_EmployeeCourseStudent" FromRole="Student" ToRole="EmployeeCourse_MTM" />
           <NavigationProperty Name="Person" Relationship="Self.FK_PersonStudent" FromRole="Student" ToRole="Person" />
           <NavigationProperty Name="Results" Relationship="Self.FK_StudentResult" FromRole="Student" ToRole="Result" />
           <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterStudent" FromRole="Student" ToRole="Semester" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Timeslot">
           <Key>
@@ -816,18 +775,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EmployeeCourseStudent">
-          <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EmployeeCourse_MTM">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="EmployeeCourseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EmployeeCourseTimeslot">
           <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="0..1" />
           <End Role="Timeslot" Type="Self.Timeslot" Multiplicity="*" />
@@ -936,7 +883,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DB11V2Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DB11V2Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Attendances" EntityType="Self.Attendance" />
           <EntitySet Name="Batches" EntityType="Self.Batch" />
           <EntitySet Name="Courses" EntityType="Self.Course" />
@@ -948,7 +895,6 @@
           <EntitySet Name="Results" EntityType="Self.Result" />
           <EntitySet Name="Semesters" EntityType="Self.Semester" />
           <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Timeslots" EntityType="Self.Timeslot" />
           <EntitySet Name="Timetables" EntityType="Self.Timetable" />
           <EntitySet Name="TimetableTimeslot_MTM" EntityType="Self.TimetableTimeslot_MTM" />
@@ -997,10 +943,6 @@
             <End Role="Person" EntitySet="People" />
             <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmployeeCourseStudent" Association="Self.FK_EmployeeCourseStudent">
-            <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
           <AssociationSet Name="FK_EmployeeCourseTimeslot" Association="Self.FK_EmployeeCourseTimeslot">
             <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
             <End Role="Timeslot" EntitySet="Timeslots" />
@@ -1043,7 +985,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB11V2ModelStoreContainer" CdmEntityContainer="DB11V2Entities">
+        <EntityContainerMapping StorageEntityContainer="DB11V2ModelStoreContainer" CdmEntityContainer="DB11V2Entities1">
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="DB11V2Model.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
@@ -1144,21 +1086,9 @@
               <MappingFragment StoreEntitySet="Student">
                 <ScalarProperty Name="PersonID" ColumnName="PersonID" />
                 <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
-                <ScalarProperty Name="EmployeeCourseID" ColumnName="EmployeeCourseID" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
                 <ScalarProperty Name="RegNo" ColumnName="RegNo" />
                 <ScalarProperty Name="Fee" ColumnName="Fee" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DB11V2Model.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
