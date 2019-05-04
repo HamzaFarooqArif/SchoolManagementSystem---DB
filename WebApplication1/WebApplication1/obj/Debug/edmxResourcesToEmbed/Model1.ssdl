@@ -114,6 +114,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SemesterID" Type="int" />
+    <Property Name="IsDatesheet" Type="bit" />
   </EntityType>
   <EntityType Name="TimetableTimeslot_MTM">
     <Key>

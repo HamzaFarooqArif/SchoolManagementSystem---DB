@@ -126,6 +126,7 @@
         <MappingFragment StoreEntitySet="Timetable">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+          <ScalarProperty Name="IsDatesheet" ColumnName="IsDatesheet" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

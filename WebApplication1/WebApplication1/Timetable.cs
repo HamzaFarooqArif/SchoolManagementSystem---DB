@@ -21,7 +21,8 @@ namespace WebApplication1
         }
     
         public int ID { get; set; }
-        public Nullable<int> SemesterID { get; set; }
+        public int SemesterID { get; set; }
+        public Nullable<bool> IsDatesheet { get; set; }
     
         public virtual Semester Semester { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

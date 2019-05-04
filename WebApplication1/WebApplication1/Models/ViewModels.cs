@@ -58,4 +58,14 @@ namespace WebApplication1.Models
         public string Course { get; set; }
         
     }
+
+    public class TimetableViewModels
+    {
+        public int ID { get; set; }
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Input must be numeric")]
+        public string Semester { get; set; }
+        public string Batch { get; set; }
+        public string isDatesheet { get; set; }
+    }
 }

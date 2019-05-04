@@ -251,7 +251,7 @@ namespace WebApplication1.Classes
         public static bool Edit(int id, PersonEmployeeViewModels model)
         {
             DB11V2Entities db = new DB11V2Entities();
-            if (db.People.Any(p => p.CNIC.Equals(model.CNIC)))
+            if (db.People.Any(p => p.CNIC.Equals(model.CNIC) && p.ID != id))
             {
                 return false;
             }
@@ -376,6 +376,59 @@ namespace WebApplication1.Classes
             DB11V2Entities db = new DB11V2Entities();
             EmployeeCourseSemester_MTM obj = db.EmployeeCourseSemester_MTM.Where(temp => temp.ID == id).FirstOrDefault();
             db.EmployeeCourseSemester_MTM.Remove(obj);
+            db.SaveChanges();
+            return true;
+        }
+    }
+    public class TimetableAction
+    {
+        public static bool Create(TimetableViewModels model)
+        {
+            DB11V2Entities db = new DB11V2Entities();
+
+            int batchID = Int32.Parse(model.Batch);
+            int semesterID = db.Semesters.Where(temp => temp.Name.Equals(model.Semester) && temp.BatchID == batchID).FirstOrDefault().ID;
+            int tmpIsDatesheet = Int32.Parse(model.isDatesheet);
+            bool isDatesheet = false;
+            if (tmpIsDatesheet == 0) isDatesheet = false;
+            if (tmpIsDatesheet == 1) isDatesheet = true;
+
+            if (db.Timetables.Any(temp => temp.SemesterID == semesterID && temp.IsDatesheet == isDatesheet)) return false;
+
+            Timetable tt = new Timetable();
+            tt.SemesterID = semesterID;
+            tt.IsDatesheet = isDatesheet;
+
+            db.Timetables.Add(tt);
+            db.SaveChanges();
+
+            return true;
+        }
+
+        public static bool Edit(int id, TimetableViewModels model)
+        {
+            DB11V2Entities db = new DB11V2Entities();
+
+            int batchID = Int32.Parse(model.Batch);
+            int semesterID = db.Semesters.Where(temp => temp.Name.Equals(model.Semester) && temp.BatchID == batchID).FirstOrDefault().ID;
+            int tmpIsDatesheet = Int32.Parse(model.isDatesheet);
+            bool isDatesheet = false;
+            if (tmpIsDatesheet == 0) isDatesheet = false;
+            if (tmpIsDatesheet == 1) isDatesheet = true;
+
+            if (db.Timetables.Any(temp => temp.SemesterID == semesterID && temp.IsDatesheet == isDatesheet)) return false;
+
+            db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().SemesterID = semesterID;
+            db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet = isDatesheet;
+            db.SaveChanges();
+
+            return true;
+        }
+        public static bool Delete(int id)
+        {
+            DB11V2Entities db = new DB11V2Entities();
+            Timetable obj = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault();
+            db.Timetables.Remove(obj);
             db.SaveChanges();
             return true;
         }

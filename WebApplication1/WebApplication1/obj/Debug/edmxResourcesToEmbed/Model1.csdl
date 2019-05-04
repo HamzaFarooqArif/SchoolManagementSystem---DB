@@ -145,6 +145,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SemesterID" Type="Int32" />
+    <Property Name="IsDatesheet" Type="Boolean" />
     <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterTimetable" FromRole="Timetable" ToRole="Semester" />
     <NavigationProperty Name="TimetableTimeslot_MTM" Relationship="Self.FK_TimeTableTimetableTimeslot" FromRole="Timetable" ToRole="TimetableTimeslot_MTM" />
   </EntityType>
