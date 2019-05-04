@@ -56,7 +56,10 @@ namespace WebApplication1.Models
         [Required]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Input must be Alphabets")]
         public string Course { get; set; }
-        
+        public int BatchID { get; set; }
+        public int SemesterID { get; set; }
+        public int CourseID { get; set; }
+
     }
 
     public class TimetableViewModels
@@ -67,5 +70,31 @@ namespace WebApplication1.Models
         public string Semester { get; set; }
         public string Batch { get; set; }
         public string isDatesheet { get; set; }
+    }
+    public class TimeslotViewModels
+    {
+        public int ID { get; set; }
+        public int WorkingDayID { get; set; }
+        public int StartEndTime { get; set; }
+
+        public int BatchID { get; set; }
+        public int SemesterID { get; set; }
+        public int CourseID { get; set; }
+        [Required]
+        public int EmployeeID { get; set; }
+        public int TimetableID { get; set; }
+
+
+    }
+    public class TimeslotDeleteViewModels
+    {
+        public string Batch { get; set; }
+        public string Semester { get; set; }
+        public string Course { get; set; }
+        public string Employee { get; set; }
+        public string WorkingDay { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+        public int TimetableID { get; set; }
     }
 }

@@ -432,5 +432,170 @@ namespace WebApplication1.Classes
             db.SaveChanges();
             return true;
         }
+
+        public static int TimeslotCreate(TimeslotViewModels model)
+        {
+            DB11V2Entities db = new DB11V2Entities();
+
+            if (!db.Timetables.Any(temp => temp.ID == model.TimetableID)) return -1;
+
+            List<TimetableTimeslot_MTM> timetableTimeslotList = db.TimetableTimeslot_MTM.Where(temp => temp.TimetableID == model.TimetableID).ToList();
+            List<Timeslot> timeslotList = new List<Timeslot>();
+            foreach(TimetableTimeslot_MTM tttsmtm in timetableTimeslotList)
+            {
+                timeslotList.Add(db.Timeslots.Where(temp=>temp.ID == tttsmtm.TimeslotID).FirstOrDefault());
+            }
+            
+            CourseSemester_MTM cs = db.CourseSemester_MTM.Where(temp => temp.CourseID == model.CourseID && temp.SemesterID == model.SemesterID).FirstOrDefault();
+            EmployeeCourseSemester_MTM ecs = db.EmployeeCourseSemester_MTM.Where(temp => temp.CourseSemesterID == cs.ID && temp.EmployeeID == model.EmployeeID).FirstOrDefault();
+            Timeslot ts = new Timeslot();
+            ts.EmployeeCourseSemesterID = ecs.ID;
+            ts.WorkingDaysID = model.WorkingDayID;
+
+            if (db.Timetables.Where(temp => temp.ID == model.TimetableID).FirstOrDefault().IsDatesheet == true)
+            {
+                ts.IsExam = true;
+            }
+            else ts.IsExam = false;
+
+            //-------------------------------------------------------------------
+            if (model.StartEndTime == 1)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 8, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 9, 0, 0);
+            }
+            if (model.StartEndTime == 2)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 9, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 10, 0, 0);
+            }
+            if (model.StartEndTime == 3)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 10, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 11, 0, 0);
+            }
+            if (model.StartEndTime == 4)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 11, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 12, 0, 0);
+            }
+            if (model.StartEndTime == 5)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 1, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 2, 0, 0);
+            }
+            if (model.StartEndTime == 6)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 2, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 3, 0, 0);
+            }
+            if (model.StartEndTime == 7)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 3, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 4, 0, 0);
+            }
+            //-------------------------------------------------------------------
+            foreach (Timeslot tst in timeslotList)
+            {
+                if (tst.EmployeeCourseSemesterID == ts.EmployeeCourseSemesterID && tst.StartTime == ts.StartTime && tst.EndTime == ts.EndTime && tst.WorkingDaysID == ts.WorkingDaysID && tst.IsExam == ts.IsExam) return -2;
+            }
+            db.Timeslots.Add(ts);
+            db.SaveChanges();
+
+            int tsid = db.Timeslots.Where(temp => temp.EmployeeCourseSemesterID == ts.EmployeeCourseSemesterID && temp.StartTime == ts.StartTime && temp.EndTime == ts.EndTime && temp.WorkingDaysID == ts.WorkingDaysID && temp.IsExam == ts.IsExam).FirstOrDefault().ID;
+            TimetableTimeslot_MTM ttts = new TimetableTimeslot_MTM();
+            ttts.TimeslotID = tsid;
+            ttts.TimetableID = model.TimetableID;
+            db.TimetableTimeslot_MTM.Add(ttts);
+            db.SaveChanges();
+
+            return 1;
+        }
+        public static int TimeslotEdit(int timeslotID, TimeslotViewModels model)
+        {
+            DB11V2Entities db = new DB11V2Entities();
+
+            if (!db.Timetables.Any(temp => temp.ID == model.TimetableID)) return -1;
+
+            List<TimetableTimeslot_MTM> timetableTimeslotList = db.TimetableTimeslot_MTM.Where(temp => temp.TimetableID == model.TimetableID).ToList();
+            List<Timeslot> timeslotList = new List<Timeslot>();
+            foreach (TimetableTimeslot_MTM tttsmtm in timetableTimeslotList)
+            {
+                timeslotList.Add(db.Timeslots.Where(temp => temp.ID == tttsmtm.TimeslotID).FirstOrDefault());
+            }
+
+            CourseSemester_MTM cs = db.CourseSemester_MTM.Where(temp => temp.CourseID == model.CourseID && temp.SemesterID == model.SemesterID).FirstOrDefault();
+            EmployeeCourseSemester_MTM ecs = db.EmployeeCourseSemester_MTM.Where(temp => temp.CourseSemesterID == cs.ID && temp.EmployeeID == model.EmployeeID).FirstOrDefault();
+            Timeslot ts = new Timeslot();
+            ts.EmployeeCourseSemesterID = ecs.ID;
+            ts.WorkingDaysID = model.WorkingDayID;
+
+            if (db.Timetables.Where(temp => temp.ID == model.TimetableID).FirstOrDefault().IsDatesheet == true)
+            {
+                ts.IsExam = true;
+            }
+            else ts.IsExam = false;
+
+            //-------------------------------------------------------------------
+            if (model.StartEndTime == 1)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 8, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 9, 0, 0);
+            }
+            if (model.StartEndTime == 2)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 9, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 10, 0, 0);
+            }
+            if (model.StartEndTime == 3)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 10, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 11, 0, 0);
+            }
+            if (model.StartEndTime == 4)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 11, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 12, 0, 0);
+            }
+            if (model.StartEndTime == 5)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 1, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 2, 0, 0);
+            }
+            if (model.StartEndTime == 6)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 2, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 3, 0, 0);
+            }
+            if (model.StartEndTime == 7)
+            {
+                ts.StartTime = new DateTime(2000, 1, 1, 3, 0, 0);
+                ts.EndTime = new DateTime(2000, 1, 1, 4, 0, 0);
+            }
+            //-------------------------------------------------------------------
+            //foreach (Timeslot tst in timeslotList)
+            //{
+            //    if (tst.EmployeeCourseSemesterID == ts.EmployeeCourseSemesterID && tst.StartTime == ts.StartTime && tst.EndTime == ts.EndTime && tst.WorkingDaysID == ts.WorkingDaysID && tst.IsExam == ts.IsExam) return -2;
+            //}
+            db.Timeslots.Where(temp => temp.ID == timeslotID).FirstOrDefault().EmployeeCourseSemesterID = ts.EmployeeCourseSemesterID;
+            db.SaveChanges();
+
+            //int tsid = db.Timeslots.Where(temp => temp.EmployeeCourseSemesterID == ts.EmployeeCourseSemesterID && temp.StartTime == ts.StartTime && temp.EndTime == ts.EndTime && temp.WorkingDaysID == ts.WorkingDaysID && temp.IsExam == ts.IsExam).FirstOrDefault().ID;
+            //TimetableTimeslot_MTM ttts = new TimetableTimeslot_MTM();
+            //ttts.TimeslotID = tsid;
+            //ttts.TimetableID = model.TimetableID;
+            //db.TimetableTimeslot_MTM.Add(ttts);
+            //db.SaveChanges();
+
+            return 1;
+        }
+        public static bool TimeslotDelete(int timeslotID, TimeslotViewModels model)
+        {
+            DB11V2Entities db = new DB11V2Entities();
+            Timeslot obj = db.Timeslots.Where(temp => temp.ID == timeslotID).FirstOrDefault();
+            db.Timeslots.Remove(obj);
+            db.SaveChanges();
+            return true;
+        }
     }
 }

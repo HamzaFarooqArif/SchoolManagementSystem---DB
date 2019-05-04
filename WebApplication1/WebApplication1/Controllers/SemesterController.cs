@@ -131,7 +131,9 @@ namespace WebApplication1.Controllers
         // GET: Semester/Edit/5
         public ActionResult Edit(int sid, int cid)
         {
-            return View();
+            DB11V2Entities db = new DB11V2Entities();
+            Course c = db.Courses.Where(temp => temp.ID == cid).FirstOrDefault();
+            return View(c);
         }
 
         // POST: Semester/Edit/5

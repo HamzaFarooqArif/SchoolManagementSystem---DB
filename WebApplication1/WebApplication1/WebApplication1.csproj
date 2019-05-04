@@ -370,6 +370,10 @@
     <Content Include="Views\Timetable\Create.cshtml" />
     <Content Include="Views\Timetable\Edit.cshtml" />
     <Content Include="Views\Timetable\Delete.cshtml" />
+    <Content Include="Views\Timetable\PreviewIndex.cshtml" />
+    <Content Include="Views\Timetable\PreviewCreate.cshtml" />
+    <Content Include="Views\Timetable\PreviewEdit.cshtml" />
+    <Content Include="Views\Timetable\PreviewDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

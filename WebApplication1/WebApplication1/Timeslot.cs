@@ -21,7 +21,7 @@ namespace WebApplication1
         }
     
         public int ID { get; set; }
-        public Nullable<int> EmployeeCourseSemesterID { get; set; }
+        public int EmployeeCourseSemesterID { get; set; }
         public Nullable<System.DateTime> StartTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
         public Nullable<int> WorkingDaysID { get; set; }
