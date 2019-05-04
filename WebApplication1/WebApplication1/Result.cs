@@ -15,8 +15,8 @@ namespace WebApplication1
     public partial class Result
     {
         public int ID { get; set; }
-        public Nullable<int> StudentID { get; set; }
-        public Nullable<int> CourseSemesterID { get; set; }
+        public int StudentID { get; set; }
+        public int CourseSemesterID { get; set; }
         public string ObtainedMarks { get; set; }
         public string TotalMarks { get; set; }
     

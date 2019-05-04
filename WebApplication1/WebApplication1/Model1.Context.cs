@@ -35,7 +35,6 @@ namespace WebApplication1
         public virtual DbSet<Result> Results { get; set; }
         public virtual DbSet<Semester> Semesters { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Timeslot> Timeslots { get; set; }
         public virtual DbSet<Timetable> Timetables { get; set; }
         public virtual DbSet<TimetableTimeslot_MTM> TimetableTimeslot_MTM { get; set; }

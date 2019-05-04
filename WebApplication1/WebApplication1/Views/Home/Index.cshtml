@@ -1,31 +1,277 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    Layout = null;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!--Libraries-->
+    <link rel="stylesheet" href="~/Resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Resources/css/elegant-fonts.css">
+    <link rel="stylesheet" href="~/Resources/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Resources/css/swiper.min.css">
+    <link rel="stylesheet" href="~/Resources/css/style.css">
+    <title>Index</title>
+</head>
+<style>
+    .navA {
+        background: rgba(0, 0, 0, 0.8);
+        position: fixed;
+    }
+
+    .footerA {
+        background: rgba(60, 60, 60, 1);
+    }
+
+    .contentA {
+        margin-top: 42px;
+    }
+
+    body {
+        padding-bottom: 0px;
+    }
+</style>
+
+<body>
+  
+        @{
+            ViewBag.Title = "Home Page";
+        }
+        <header class="site-header navA">
+            @*<div class="top-header-bar">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 d-none d-md-flex flex-wrap justify-content-center justify-content-lg-start mb-3 mb-lg-0">
+                                <div class="header-bar-email d-flex align-items-center">
+                                    <i class="fa fa-envelope"></i><a href="#">tuanna.design@gmail.com</a>
+                                </div><!-- .header-bar-email -->
+
+                                <div class="header-bar-text lg-flex align-items-center">
+                                    <p><i class="fa fa-phone"></i>001-1234-88888 </p>
+                                </div><!-- .header-bar-text -->
+                            </div><!-- .col -->
+
+                            <div class="col-12 col-lg-6 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
+                                <div class="header-bar-search">
+                                    <form class="flex align-items-stretch">
+                                        <input type="search" placeholder="What would you like to learn?">
+                                        <button type="submit" value="" class="flex justify-content-center align-items-center"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div><!-- .header-bar-search -->
+
+                                <div class="header-bar-menu">
+                                    <ul class="flex justify-content-center align-items-center py-2 pt-md-0">
+                                        <li><a href="#">Register</a></li>
+                                        <li><a href="#">Login</a></li>
+                                    </ul>
+                                </div><!-- .header-bar-menu -->
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                    </div><!-- .container-fluid -->
+                </div><!-- .top-header-bar -->*@
+            <div class="nav-bar" @*style="padding-top: 0px; padding-bottom: 0px;"*@>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-9 col-lg-3">
+                            <div class="site-branding">
+                                <h1 class="site-title"><a href="index.html" rel="home">L<span>MS</span></a></h1>
+                            </div><!-- .site-branding -->
+                        </div><!-- .col -->
+
+                        <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
+                            <nav class="site-navigation flex justify-content-end align-items-center">
+                                <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
+
+                                    <li style=""><a href="/Course"></a></li>
+                                    <li class="current-menu-item"><a href="/Home"> Home</a></li>
+                                    <li><a href="#">Reports</a></li>
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" href="#">Links</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/Batch">Batch</a></li>
+                                            <li><a href="/Course">Course</a></li>
+                                            <li><a href="/Semester">Semester</a></li>
+                                            <li><a href="/Employee">Employee</a></li>
+                                            <li><a href="/Student">Student</a></li>
+                                            <li><a href="/Attendance/Create">Mark Attendance</a></li>
+                                            <li><a href="/Result/ViewResult">Result</a></li>
+                                            <li><a href="/Timetable">Timetable</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                @*<div class="dropdown">
+                                        <button class="btn btn-primary-outline dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Dropdown button
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>*@
+                                <div class="hamburger-menu d-lg-none">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div><!-- .hamburger-menu -->
+
+                                <div class="header-bar-cart">
+                                    <a href="#" class="flex justify-content-center align-items-center"><span aria-hidden="true" class="icon_bag_alt"></span></a>
+                                </div><!-- .header-bar-search -->
+                            </nav><!-- .site-navigation -->
+                        </div><!-- .col -->
+                    </div><!-- .row -->
+                </div><!-- .container -->
+            </div><!-- .nav-bar -->
+        </header><!-- .site-header -->
+
+        <div class="hero-content-overlay" >
+            <div class="container" style="background-image:url(~/images/hero-bg.jpg)">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="hero-content-wrap flex flex-column justify-content-center align-items-start">
+                            <header class="entry-header">
+                                <h4>Get started with online management</h4>
+                                <h1>best online<br />Learning Management System</h1>
+                            </header><!-- .entry-header -->
+
+                            <div class="entry-content">
+                                <p>A learning management system (LMS) is a software application or Web-based technology used to plan, implement, and assess a specific learning process. </p>
+                            </div><!-- .entry-content -->
+
+                            <footer class="entry-footer read-more">
+                                <a href="#">read more</a>
+                            </footer><!-- .entry-footer -->
+                        </div><!-- .hero-content-wrap -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div><!-- .hero-content-hero-content-overlay -->
+        <!-- .hero-content -->
+        <!-- .icon-boxes -->
+
+
+        <section class="about-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6 align-content-lg-stretch">
+                        <header class="heading">
+                            <h2 class="entry-title">About LMS</h2>
+
+                            <p>Learning Management System manages Students, Employees of CSE department.</p>
+                        </header><!-- .heading -->
+
+                        <div class="entry-content ezuca-stats">
+                            <div class="stats-wrap flex flex-wrap justify-content-lg-between">
+                                <div class="stats-count">
+                                    50<span>M+</span>
+                                    <p>STUDENTS</p>
+                                </div><!-- .stats-count -->
+
+                                <div class="stats-count">
+                                    30<span>K+</span>
+                                    <p>COURSES</p>
+                                </div><!-- .stats-count -->
+
+                                <div class="stats-count">
+                                    340<span>M+</span>
+                                    <p>INSTRUCTORS</p>
+                                </div><!-- .stats-count -->
+                                <!-- .stats-count -->
+                            </div><!-- .stats-wrap -->
+                        </div><!-- .ezuca-stats -->
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-lg-6 flex align-content-center mt-5 mt-lg-0">
+                        <div class="ezuca-video position-relative">
+                            <div class="video-play-btn position-absolute">
+                                <img src="~/images/video-icon.png" alt="Video Play">
+                            </div><!-- .video-play-btn -->
+
+                            <img src="~/images/video-screenshot.png" alt="">
+                        </div><!-- .ezuca-video -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </section><!-- .about-section -->
+        <footer class="site-footer footerA">
+            <div class="footer-widgets">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="foot-about">
+                                <h1 class="site-title"><a href="index.html" rel="home">L<span>MS</span></a></h1>
+
+
+
+                                <p class="footer-copyright">
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;
+                                    <script>document.write(new Date().getFullYear());</script> All rights reserved
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </p>
+                            </div><!-- .foot-about -->
+                        </div><!-- .col -->
+
+                        <div class="col-12 col-md-6 col-lg-3 mt-5 mt-md-0">
+                            <div class="foot-contact">
+                                <h2>Contact Us</h2>
+
+                                <ul>
+                                    <li>Email: registrar@uet.edu.pk</li>
+                                    <li>Phone: 042-99029216, 042-99029452</li>
+                                    <li>G.T Road, Staff Houses Engineering University Lahore, Lahore, Punjab 54890</li>
+                                </ul>
+                            </div><!-- .foot-contact -->
+                        </div><!-- .col -->
+
+                        <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0">
+                            <div class="quick-links flex flex-wrap">
+                                <h2 class="w-100">Quick Links</h2>
+
+                                <ul class="w-50">
+                                    <li><a href="#">About </a></li>
+                                    <li><a href="#">Terms of Use </a></li>
+                                    <li><a href="#">Privacy Policy </a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                </ul>
+
+
+                            </div><!-- .quick-links -->
+                        </div><!-- .col -->
+
+                        <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0">
+                            <div class="follow-us">
+                                <h2>Follow Us</h2>
+
+                                <ul class="follow-us flex flex-wrap align-items-center">
+                                    <li><a href="https://www.facebook.com/UETXNewsLahore/"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://uet.edu.pk/"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="https://www.instagram.com/explore/locations/227738345/uet-lahore?hl=en"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://twitter.com/uet_official"><i class="fa fa-twitter"></i></a></li>
+                                </ul>
+                            </div><!-- .quick-links -->
+                        </div><!-- .col -->
+                    </div><!-- .row -->
+                </div><!-- .container -->
+            </div><!-- .footer-widgets -->
+            <!-- .container -->
+
+        </footer><!-- .site-footer -->
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        
+</body>
+</html>

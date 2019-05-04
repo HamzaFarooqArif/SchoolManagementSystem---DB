@@ -61,7 +61,7 @@
     <Property Name="CourseSemesterID" Type="Int32" />
     <NavigationProperty Name="CourseSemester_MTM" Relationship="Self.FK_CourseSemesterEmployeeCourseSemester" FromRole="EmployeeCourseSemester_MTM" ToRole="CourseSemester_MTM" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeEmployeeCourseSemester" FromRole="EmployeeCourseSemester_MTM" ToRole="Employee" />
-    <NavigationProperty Name="Timeslots" Relationship="Self.FK_EmployeeCourseSemesterTimeslot" FromRole="EmployeeCourseSemester_MTM" ToRole="Timeslot" />
+    <NavigationProperty Name="Timeslots" Relationship="Self.FK_EmployeeCourseTimeslot" FromRole="EmployeeCourseSemester_MTM" ToRole="Timeslot" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -106,6 +106,7 @@
     </Key>
     <Property Name="PersonID" Type="Int32" Nullable="false" />
     <Property Name="SemesterID" Type="Int32" />
+    <Property Name="EmployeeCourseID" Type="Int32" />
     <Property Name="BatchID" Type="Int32" />
     <Property Name="RegNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Fee" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -114,16 +115,6 @@
     <NavigationProperty Name="Person" Relationship="Self.FK_PersonStudent" FromRole="Student" ToRole="Person" />
     <NavigationProperty Name="Results" Relationship="Self.FK_StudentResult" FromRole="Student" ToRole="Result" />
     <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterStudent" FromRole="Student" ToRole="Semester" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Timeslot">
     <Key>
@@ -135,7 +126,7 @@
     <Property Name="EndTime" Type="DateTime" Precision="3" />
     <Property Name="WorkingDaysID" Type="Int32" />
     <Property Name="IsExam" Type="Boolean" />
-    <NavigationProperty Name="EmployeeCourseSemester_MTM" Relationship="Self.FK_EmployeeCourseSemesterTimeslot" FromRole="Timeslot" ToRole="EmployeeCourseSemester_MTM" />
+    <NavigationProperty Name="EmployeeCourseSemester_MTM" Relationship="Self.FK_EmployeeCourseTimeslot" FromRole="Timeslot" ToRole="EmployeeCourseSemester_MTM" />
     <NavigationProperty Name="TimetableTimeslot_MTM" Relationship="Self.FK_TimeslotTimetableTimeslot" FromRole="Timeslot" ToRole="TimetableTimeslot_MTM" />
     <NavigationProperty Name="WorkingDay" Relationship="Self.FK_WorkingDaysTimeslot" FromRole="Timeslot" ToRole="WorkingDays" />
   </EntityType>
@@ -145,7 +136,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SemesterID" Type="Int32" />
-    <Property Name="IsDatesheet" Type="Boolean" />
+    <Property Name="IsDateSheet" Type="Boolean" />
     <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterTimetable" FromRole="Timetable" ToRole="Semester" />
     <NavigationProperty Name="TimetableTimeslot_MTM" Relationship="Self.FK_TimeTableTimetableTimeslot" FromRole="Timetable" ToRole="TimetableTimeslot_MTM" />
   </EntityType>
@@ -180,7 +171,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentAttendance">
-    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -192,7 +185,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_BatchSemester">
-    <End Role="Batch" Type="Self.Batch" Multiplicity="0..1" />
+    <End Role="Batch" Type="Self.Batch" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Semester" Type="Self.Semester" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Batch">
@@ -216,7 +211,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CourseCourseSemester">
-    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="CourseSemester_MTM" Type="Self.CourseSemester_MTM" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Course">
@@ -228,7 +225,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CourseSemesterEmployeeCourseSemester">
-    <End Role="CourseSemester_MTM" Type="Self.CourseSemester_MTM" Multiplicity="0..1" />
+    <End Role="CourseSemester_MTM" Type="Self.CourseSemester_MTM" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="EmployeeCourseSemester_MTM" Type="Self.EmployeeCourseSemester_MTM" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CourseSemester_MTM">
@@ -252,7 +251,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SemesterCourseSemester">
-    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
+    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="CourseSemester_MTM" Type="Self.CourseSemester_MTM" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Semester">
@@ -264,7 +265,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_EmployeeEmployeeCourseSemester">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="EmployeeCourseSemester_MTM" Type="Self.EmployeeCourseSemester_MTM" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
@@ -276,7 +279,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_PersonEmployee">
-    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Person">
@@ -287,8 +292,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EmployeeCourseSemesterTimeslot">
-    <End Role="EmployeeCourseSemester_MTM" Type="Self.EmployeeCourseSemester_MTM" Multiplicity="0..1" />
+  <Association Name="FK_EmployeeCourseTimeslot">
+    <End Role="EmployeeCourseSemester_MTM" Type="Self.EmployeeCourseSemester_MTM" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Timeslot" Type="Self.Timeslot" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EmployeeCourseSemester_MTM">
@@ -300,7 +307,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_PersonStudent">
-    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Person">
@@ -312,7 +321,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentResult">
-    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Result" Type="Self.Result" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -324,7 +335,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SemesterStudent">
-    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
+    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Semester">
@@ -336,7 +349,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SemesterTimetable">
-    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
+    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Semester">
@@ -348,7 +363,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TimeslotTimetableTimeslot">
-    <End Role="Timeslot" Type="Self.Timeslot" Multiplicity="0..1" />
+    <End Role="Timeslot" Type="Self.Timeslot" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="TimetableTimeslot_MTM" Type="Self.TimetableTimeslot_MTM" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Timeslot">
@@ -360,7 +377,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_WorkingDaysTimeslot">
-    <End Role="WorkingDays" Type="Self.WorkingDay" Multiplicity="0..1" />
+    <End Role="WorkingDays" Type="Self.WorkingDay" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Timeslot" Type="Self.Timeslot" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="WorkingDays">
@@ -394,7 +413,6 @@
     <EntitySet Name="Results" EntityType="Self.Result" />
     <EntitySet Name="Semesters" EntityType="Self.Semester" />
     <EntitySet Name="Students" EntityType="Self.Student" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Timeslots" EntityType="Self.Timeslot" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />
     <EntitySet Name="TimetableTimeslot_MTM" EntityType="Self.TimetableTimeslot_MTM" />
@@ -439,7 +457,7 @@
       <End Role="Person" EntitySet="People" />
       <End Role="Employee" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="FK_EmployeeCourseSemesterTimeslot" Association="Self.FK_EmployeeCourseSemesterTimeslot">
+    <AssociationSet Name="FK_EmployeeCourseTimeslot" Association="Self.FK_EmployeeCourseTimeslot">
       <End Role="EmployeeCourseSemester_MTM" EntitySet="EmployeeCourseSemester_MTM" />
       <End Role="Timeslot" EntitySet="Timeslots" />
     </AssociationSet>

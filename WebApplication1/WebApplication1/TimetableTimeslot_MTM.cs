@@ -15,8 +15,8 @@ namespace WebApplication1
     public partial class TimetableTimeslot_MTM
     {
         public int ID { get; set; }
-        public Nullable<int> TimetableID { get; set; }
-        public Nullable<int> TimeslotID { get; set; }
+        public int TimetableID { get; set; }
+        public int TimeslotID { get; set; }
     
         public virtual Timeslot Timeslot { get; set; }
         public virtual Timetable Timetable { get; set; }

@@ -166,21 +166,21 @@ namespace WebApplication1.Controllers
             }));
         }
 
-        public JsonResult LoadTimetables(int isDatesheet, int batchId)
+        public JsonResult LoadTimetables(int IsDateSheet, int batchId)
         {
             DB11V2Entities db = new DB11V2Entities();
             //IEnumerable<GetProducts_Result> res = db.GetProducts();
             List<Semester> semesterList = db.Semesters.Where(temp => temp.BatchID == batchId).ToList();
             List<Timetable> res = new List<Timetable>();
             bool ind = false;
-            if (isDatesheet == 0) ind = false;
-            if (isDatesheet == 1) ind = true;
+            if (IsDateSheet == 0) ind = false;
+            if (IsDateSheet == 1) ind = true;
 
             foreach(Semester sm in semesterList)
             {
-                if(db.Timetables.Any(temp=>temp.SemesterID == sm.ID && temp.IsDatesheet == ind))
+                if(db.Timetables.Any(temp=>temp.SemesterID == sm.ID && temp.IsDateSheet == ind))
                 {
-                    res.Add(db.Timetables.Where(temp => temp.SemesterID == sm.ID && temp.IsDatesheet == ind).FirstOrDefault());
+                    res.Add(db.Timetables.Where(temp => temp.SemesterID == sm.ID && temp.IsDateSheet == ind).FirstOrDefault());
                 }
             }
             return Json(res.Select(x => new
@@ -201,7 +201,7 @@ namespace WebApplication1.Controllers
             ttvm.ID = id;
             ttvm.Semester = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().Name;
             ttvm.Batch = db.Batches.Where(temp => temp.ID == batchid).FirstOrDefault().Session;
-            ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet.ToString();
+            ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDateSheet.ToString();
 
             return View(ttvm);
         }
@@ -445,8 +445,9 @@ namespace WebApplication1.Controllers
                     return View();
                 }
             }
-            catch
+            catch(Exception e)
             {
+                throw (e);
                 ViewBag.color = "red";
                 ViewBag.message = "Exception Catched";
                 return View();
@@ -465,7 +466,7 @@ namespace WebApplication1.Controllers
             ttvm.ID = id;
             ttvm.Semester = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().Name;
             ttvm.Batch = db.Batches.Where(temp => temp.ID == batchid).FirstOrDefault().Session;
-            ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet.ToString();
+            ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDateSheet.ToString();
             ttvm.BatchID = batchid;
             ttvm.SemesterID = semesterid;
 
@@ -495,7 +496,7 @@ namespace WebApplication1.Controllers
                     ttvm.ID = id;
                     ttvm.Semester = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().Name;
                     ttvm.Batch = db.Batches.Where(temp => temp.ID == batchid).FirstOrDefault().Session;
-                    ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet.ToString();
+                    ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDateSheet.ToString();
                     ttvm.BatchID = batchid;
                     ttvm.SemesterID = semesterid;
 
@@ -515,7 +516,7 @@ namespace WebApplication1.Controllers
                 ttvm.ID = id;
                 ttvm.Semester = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().Name;
                 ttvm.Batch = db.Batches.Where(temp => temp.ID == batchid).FirstOrDefault().Session;
-                ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet.ToString();
+                ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDateSheet.ToString();
                 ttvm.BatchID = batchid;
                 ttvm.SemesterID = semesterid;
 
@@ -537,7 +538,7 @@ namespace WebApplication1.Controllers
             ttvm.ID = id;
             ttvm.Semester = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().Name;
             ttvm.Batch = db.Batches.Where(temp => temp.ID == batchid).FirstOrDefault().Session;
-            ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet.ToString();
+            ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDateSheet.ToString();
 
             return View(ttvm);
         }
@@ -555,7 +556,7 @@ namespace WebApplication1.Controllers
             ttvm.ID = id;
             ttvm.Semester = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().Name;
             ttvm.Batch = db.Batches.Where(temp => temp.ID == batchid).FirstOrDefault().Session;
-            ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet.ToString();
+            ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDateSheet.ToString();
 
             try
             {

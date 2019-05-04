@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,21 +41,9 @@ namespace WebApplication1.Controllers
             return View(result);
         }
 
-        public ActionResult Create(int id)
-        {
-            //return RedirectToAction("CourseReport");
-            return View("Report"+id.ToString()+"View");
-        }
-
-        //public ActionResult CourseReport()
+        //public ActionResult Create()
         //{
-        //    DB11V2Entities db = new DB11V2Entities();
-        //    var c = db.Courses.ToList();
-        //    CrystalReport1 r = new CrystalReport1();
-        //    r.Load();
-        //    r.SetDataSource(c);
-        //    Stream s = r.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-        //    return File(s, "application/pdf");
+
         //}
     }
 }

@@ -64,7 +64,52 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function (e){
+            var d = {};
+            d.url = '@Url.Action("LoadBatches", "TimeTable")';
+            d.type = "POST";
+            d.dataType = "json";
+            d.contentType = "application/json";
+            d.success = function (r) {
+                $("#Batch").empty();
+               // $("#Batch").prepend("option value='-1' selected='selected'>Please Select a Batch</option>");
+                $("#Batch").prepend("option value='' selected='selected'></option>");
+                for (var i = 0; i < r.length; i++) {
+                    $("#Batch").append('<option value="' + r[i].ID + '">' + r[i].Name + '</option>');
+                }
+            };
+            $.ajax(d);
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Batch").change(function () {
+                debugger;
+                event.preventDefault();
+                var selectedValue = $("#Batch").select();
+                var $url = '/TimeTable/LoadSemester';
+                //alert($url);
+
+                $.ajax({
+                    url: $url,
+                    type: 'POST',
+                    datatype: "json",
+                    data: "Item=" + $("#Batch option:selected").val(),
+                    success: function (r) {
+                        $("#Semester").empty();
+                        $("#Semester").prepend("option value='' selected='selected'></option>");
+                        for (var i = 0; i < r.length; i++) {
+                            $("#Semester").append('<option value="' + r[i].ID + '">' + r[i].Name + '</option>');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
+@*@section Scripts
 {
     <script type="text/javascript">
         $(document).ready(function (e) {
@@ -111,4 +156,4 @@
             });
         }
     </script>
-}
+}*@

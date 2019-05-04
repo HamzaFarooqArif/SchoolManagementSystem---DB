@@ -15,10 +15,10 @@ namespace WebApplication1
     public partial class Attendance
     {
         public int ID { get; set; }
-        public Nullable<int> StudentID { get; set; }
+        public int StudentID { get; set; }
         public Nullable<System.DateTime> AtdDate { get; set; }
         public string AtdStatus { get; set; }
-        public Nullable<int> CourseSemesterID { get; set; }
+        public int CourseSemesterID { get; set; }
     
         public virtual CourseSemester_MTM CourseSemester_MTM { get; set; }
         public virtual Student Student { get; set; }

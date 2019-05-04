@@ -24,8 +24,8 @@ namespace WebApplication1
         public int EmployeeCourseSemesterID { get; set; }
         public Nullable<System.DateTime> StartTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
-        public Nullable<int> WorkingDaysID { get; set; }
-        public Nullable<bool> IsExam { get; set; }
+        public int WorkingDaysID { get; set; }
+        public bool IsExam { get; set; }
     
         public virtual EmployeeCourseSemester_MTM EmployeeCourseSemester_MTM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
