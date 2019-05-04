@@ -70,6 +70,8 @@ namespace WebApplication1.Models
         public string Semester { get; set; }
         public string Batch { get; set; }
         public string isDatesheet { get; set; }
+        public int BatchID { get; set; }
+        public int SemesterID { get; set; }
     }
     public class TimeslotViewModels
     {
@@ -96,5 +98,16 @@ namespace WebApplication1.Models
         public string StartTime { get; set; }
         public string EndTime { get; set; }
         public int TimetableID { get; set; }
+    }
+    public class ReportViewModels
+    {
+        public int ID { get; set; }
+        public string ReportName { get; set; }
+
+        public ReportViewModels(int id, string ReportName)
+        {
+            this.ID = id;
+            this.ReportName = ReportName;
+        }
     }
 }

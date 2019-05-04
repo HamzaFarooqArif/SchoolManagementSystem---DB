@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>Create</h2>
+
+<br>
+<br>
+<h2>Semester Index</h2>
 
 @using (Html.BeginForm())
 {
@@ -35,13 +38,15 @@
         </div>
     </div>
 
-    <table class="table" id="courseTable">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
+    <table class="table table-bordered" id="courseTable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
     </table>
 }
 

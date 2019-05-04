@@ -4,18 +4,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br>
+<br>
+<h2>Batch Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Session)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Session)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
 
 @foreach (var item in Model) {
     <tr>

@@ -456,7 +456,20 @@ namespace WebApplication1.Controllers
         // GET: Timetable/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            DB11V2Entities db = new DB11V2Entities();
+
+            int semesterid = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().SemesterID;
+            int batchid = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().BatchID;
+
+            TimetableViewModels ttvm = new TimetableViewModels();
+            ttvm.ID = id;
+            ttvm.Semester = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().Name;
+            ttvm.Batch = db.Batches.Where(temp => temp.ID == batchid).FirstOrDefault().Session;
+            ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet.ToString();
+            ttvm.BatchID = batchid;
+            ttvm.SemesterID = semesterid;
+
+            return View(ttvm);
         }
 
         // POST: Timetable/Edit/5
@@ -473,16 +486,42 @@ namespace WebApplication1.Controllers
                 }
                 else
                 {
+                    DB11V2Entities db = new DB11V2Entities();
+
+                    int semesterid = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().SemesterID;
+                    int batchid = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().BatchID;
+
+                    TimetableViewModels ttvm = new TimetableViewModels();
+                    ttvm.ID = id;
+                    ttvm.Semester = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().Name;
+                    ttvm.Batch = db.Batches.Where(temp => temp.ID == batchid).FirstOrDefault().Session;
+                    ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet.ToString();
+                    ttvm.BatchID = batchid;
+                    ttvm.SemesterID = semesterid;
+
                     ViewBag.color = "red";
                     ViewBag.message = "Already Exists";
-                    return View();
+                    return View(ttvm);
                 }
             }
             catch
             {
+                DB11V2Entities db = new DB11V2Entities();
+
+                int semesterid = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().SemesterID;
+                int batchid = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().BatchID;
+
+                TimetableViewModels ttvm = new TimetableViewModels();
+                ttvm.ID = id;
+                ttvm.Semester = db.Semesters.Where(temp => temp.ID == semesterid).FirstOrDefault().Name;
+                ttvm.Batch = db.Batches.Where(temp => temp.ID == batchid).FirstOrDefault().Session;
+                ttvm.isDatesheet = db.Timetables.Where(temp => temp.ID == id).FirstOrDefault().IsDatesheet.ToString();
+                ttvm.BatchID = batchid;
+                ttvm.SemesterID = semesterid;
+
                 ViewBag.color = "red";
                 ViewBag.message = "Exception Catched";
-                return View();
+                return View(ttvm);
             }
         }
 

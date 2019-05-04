@@ -19,7 +19,7 @@
             </select>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="display: none;">
         <label class="control-label col-md-2">Type</label>
         <div class="col-md-10">
             <select id="isDatesheet" class="form-control">
@@ -36,13 +36,15 @@
 
 </div>
     
-    <table id="Timetable_Table" class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Semester)
-            </th>
-            <th></th>
-        </tr>
+    <table id="Timetable_Table" class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Semester)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
         @*@foreach (var item in Model) {
                 <tr>

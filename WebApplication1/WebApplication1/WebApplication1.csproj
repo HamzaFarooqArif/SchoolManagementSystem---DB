@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -209,6 +212,7 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SemesterController.cs" />
     <Compile Include="Controllers\TimetableController.cs" />
     <Compile Include="Course.cs">
@@ -374,6 +378,18 @@
     <Content Include="Views\Timetable\PreviewCreate.cshtml" />
     <Content Include="Views\Timetable\PreviewEdit.cshtml" />
     <Content Include="Views\Timetable\PreviewDelete.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\Report1View.cshtml" />
+    <Content Include="Views\Reports\Report2View.cshtml" />
+    <Content Include="Views\Reports\Report3View.cshtml" />
+    <Content Include="Views\Reports\Report4View.cshtml" />
+    <Content Include="Views\Reports\Report5View.cshtml" />
+    <Content Include="Views\Reports\Report6View.cshtml" />
+    <Content Include="Views\Reports\Report7View.cshtml" />
+    <Content Include="Views\Reports\Report8View.cshtml" />
+    <Content Include="Views\Reports\Report9View.cshtml" />
+    <Content Include="Views\Reports\Report10View.cshtml" />
+    <Content Include="Views\Reports\Report11View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -388,6 +404,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

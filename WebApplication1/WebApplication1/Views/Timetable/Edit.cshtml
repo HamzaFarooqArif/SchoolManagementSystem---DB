@@ -4,14 +4,15 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<br>
+<br>
+<h2>Edit Timetable</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>TimetableViewModels</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -30,7 +31,7 @@
                 </select>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none">
             <label class="control-label col-md-2">Type</label>
             <div class="col-md-10">
                 <select id="Datesheet" name="isDatesheet" class="form-control">
@@ -68,7 +69,12 @@
 {
     <script type="text/javascript">
         $(document).ready(function (e) {
-            getBatches();
+            $.when($.ajax(getBatches())).then(function () {
+                setDefault("Batch", @Model.BatchID);
+                $.when($.ajax(getSemesters())).then(function(){
+                    setDefault("Semester", @Model.SemesterID);
+                });
+            });
         });
 
         function getBatches() {
@@ -109,6 +115,17 @@
                     }
                 }
             });
+        }
+        function setDefault(id, itemId)
+        {
+            var selectobject = document.getElementById(id);
+
+            for (var i, j = 0; i = selectobject.options[j]; j++) {
+                if (i.value == itemId) {
+                    selectobject.selectedIndex = j;
+                    break;
+                }
+            }
         }
     </script>
 }

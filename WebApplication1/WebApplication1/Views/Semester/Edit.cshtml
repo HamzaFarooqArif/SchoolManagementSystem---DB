@@ -4,20 +4,24 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
+<br>
+<br>
+<h2>Edit Semester Courses</h2>
+<hr>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <div class="form-group">
-            <select id="Course" name="ID" class="form-control" style="float: left;">
-                <option></option>
-            </select>
-            @Html.ActionLink("Create New", "Create", "Batch")
+            <label class="control-label col-md-2">Batch</label>
+            <div class="col-md-10">
+                <select id="Course" name="ID" class="form-control" style="float: left;">
+                    <option></option>
+                </select>
+            </div>
         </div>
         <div class="form-group">
-            <div class="col-md-10">
+            <div class="col-md-10 col-md-offset-2">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
