@@ -13,10 +13,10 @@ namespace WebApplication1
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB11V2Entities1 : DbContext
+    public partial class DB11V2Entities : DbContext
     {
-        public DB11V2Entities1()
-            : base("name=DB11V2Entities1")
+        public DB11V2Entities()
+            : base("name=DB11V2Entities")
         {
         }
     
@@ -30,12 +30,12 @@ namespace WebApplication1
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<CourseSemester_MTM> CourseSemester_MTM { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<EmployeeCourse_MTM> EmployeeCourse_MTM { get; set; }
-        public virtual DbSet<EmployeeSemester_MTM> EmployeeSemester_MTM { get; set; }
+        public virtual DbSet<EmployeeCourseSemester_MTM> EmployeeCourseSemester_MTM { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Result> Results { get; set; }
         public virtual DbSet<Semester> Semesters { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Timeslot> Timeslots { get; set; }
         public virtual DbSet<Timetable> Timetables { get; set; }
         public virtual DbSet<TimetableTimeslot_MTM> TimetableTimeslot_MTM { get; set; }

@@ -12,19 +12,19 @@ namespace WebApplication1
     using System;
     using System.Collections.Generic;
     
-    public partial class EmployeeCourse_MTM
+    public partial class EmployeeCourseSemester_MTM
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EmployeeCourse_MTM()
+        public EmployeeCourseSemester_MTM()
         {
             this.Timeslots = new HashSet<Timeslot>();
         }
     
         public int ID { get; set; }
-        public Nullable<int> EmployeeID { get; set; }
-        public Nullable<int> CourseID { get; set; }
+        public int EmployeeID { get; set; }
+        public int CourseSemesterID { get; set; }
     
-        public virtual Course Course { get; set; }
+        public virtual CourseSemester_MTM CourseSemester_MTM { get; set; }
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Timeslot> Timeslots { get; set; }

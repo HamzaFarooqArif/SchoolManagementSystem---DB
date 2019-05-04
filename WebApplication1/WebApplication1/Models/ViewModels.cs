@@ -9,7 +9,7 @@ namespace WebApplication1.Models
     public class BatchViewModels
     {
         [Required]
-        [RegularExpression("^[12][0-9]{3}$", ErrorMessage = "UPRN must be numeric")]
+        [RegularExpression("^[12][0-9]{3}$", ErrorMessage = "Batch must be numeric")]
         public string BatchName { get; set; }
     }
     public class CourseViewModels
@@ -17,5 +17,45 @@ namespace WebApplication1.Models
         [Required]
         [RegularExpression("^[a-zA-Z0-9_]{1,10}$", ErrorMessage = "Input must be alphanumeric")]
         public string CourseName { get; set; }
+    }
+    public class PersonEmployeeViewModels
+    {
+        public int ID { get; set; }
+        [Required]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Input must be Alphabets")]
+        public string Name { get; set; }
+        [Required]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Input must be Alphabets")]
+        public string FatherName { get; set; }
+        [Required]
+        [RegularExpression("^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$", ErrorMessage = "Invalid CNIC e.g.12345-6789012-3")]
+        public string CNIC { get; set; }
+        [Required]
+        public string Address { get; set; }
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{4})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$", ErrorMessage = "Invalid contact e.g.03001234567")]
+        public string Contact { get; set; }
+        [Required]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Input must be Alphabets")]
+        public string Designation { get; set; }
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Input must be numeric")]
+        public string Salary { get; set; }
+
+    }
+    public class EmployeeCourseSemesterViewModels
+    {
+        public int ID { get; set; }
+        public int EmployeeID { get; set; }
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Input must be numeric")]
+        public string Batch;
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Input must be numeric")]
+        public string Semester { get; set; }
+        [Required]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Input must be Alphabets")]
+        public string Course { get; set; }
+        
     }
 }

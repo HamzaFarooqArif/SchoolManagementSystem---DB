@@ -18,7 +18,6 @@ namespace WebApplication1
         public Course()
         {
             this.CourseSemester_MTM = new HashSet<CourseSemester_MTM>();
-            this.EmployeeCourse_MTM = new HashSet<EmployeeCourse_MTM>();
         }
     
         public int ID { get; set; }
@@ -26,7 +25,5 @@ namespace WebApplication1
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseSemester_MTM> CourseSemester_MTM { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeCourse_MTM> EmployeeCourse_MTM { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DB11V2ModelStoreContainer" CdmEntityContainer="DB11V2Entities1">
+  <EntityContainerMapping StorageEntityContainer="DB11V2ModelStoreContainer" CdmEntityContainer="DB11V2Entities">
     <EntitySetMapping Name="Attendances">
       <EntityTypeMapping TypeName="DB11V2Model.Attendance">
         <MappingFragment StoreEntitySet="Attendance">
@@ -46,21 +46,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EmployeeCourse_MTM">
-      <EntityTypeMapping TypeName="DB11V2Model.EmployeeCourse_MTM">
-        <MappingFragment StoreEntitySet="EmployeeCourse_MTM">
+    <EntitySetMapping Name="EmployeeCourseSemester_MTM">
+      <EntityTypeMapping TypeName="DB11V2Model.EmployeeCourseSemester_MTM">
+        <MappingFragment StoreEntitySet="EmployeeCourseSemester_MTM">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EmployeeSemester_MTM">
-      <EntityTypeMapping TypeName="DB11V2Model.EmployeeSemester_MTM">
-        <MappingFragment StoreEntitySet="EmployeeSemester_MTM">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-          <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+          <ScalarProperty Name="CourseSemesterID" ColumnName="CourseSemesterID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -107,11 +98,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DB11V2Model.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Timeslots">
       <EntityTypeMapping TypeName="DB11V2Model.Timeslot">
         <MappingFragment StoreEntitySet="Timeslot">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="CourseEmployeeID" ColumnName="CourseEmployeeID" />
+          <ScalarProperty Name="EmployeeCourseSemesterID" ColumnName="EmployeeCourseSemesterID" />
           <ScalarProperty Name="StartTime" ColumnName="StartTime" />
           <ScalarProperty Name="EndTime" ColumnName="EndTime" />
           <ScalarProperty Name="WorkingDaysID" ColumnName="WorkingDaysID" />

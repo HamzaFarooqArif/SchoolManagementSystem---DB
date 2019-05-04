@@ -28,7 +28,6 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CourseSemester_MTM" Relationship="Self.FK_CourseCourseSemester" FromRole="Course" ToRole="CourseSemester_MTM" />
-    <NavigationProperty Name="EmployeeCourse_MTM" Relationship="Self.FK_CourseEmployeeCourse" FromRole="Course" ToRole="EmployeeCourse_MTM" />
   </EntityType>
   <EntityType Name="CourseSemester_MTM">
     <Key>
@@ -39,6 +38,7 @@
     <Property Name="SemesterID" Type="Int32" />
     <NavigationProperty Name="Attendances" Relationship="Self.FK_AttendanceCourseSemester" FromRole="CourseSemester_MTM" ToRole="Attendance" />
     <NavigationProperty Name="Course" Relationship="Self.FK_CourseCourseSemester" FromRole="CourseSemester_MTM" ToRole="Course" />
+    <NavigationProperty Name="EmployeeCourseSemester_MTM" Relationship="Self.FK_CourseSemesterEmployeeCourseSemester" FromRole="CourseSemester_MTM" ToRole="EmployeeCourseSemester_MTM" />
     <NavigationProperty Name="Results" Relationship="Self.FK_CourseSemesterResult" FromRole="CourseSemester_MTM" ToRole="Result" />
     <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterCourseSemester" FromRole="CourseSemester_MTM" ToRole="Semester" />
   </EntityType>
@@ -49,30 +49,19 @@
     <Property Name="PersonID" Type="Int32" Nullable="false" />
     <Property Name="Designation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Salary" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="EmployeeSemester_MTM" Relationship="Self.FK_EmployeeCourseResult" FromRole="Employee" ToRole="EmployeeSemester_MTM" />
-    <NavigationProperty Name="EmployeeCourse_MTM" Relationship="Self.FK_EmployeeEmployeeCourse" FromRole="Employee" ToRole="EmployeeCourse_MTM" />
+    <NavigationProperty Name="EmployeeCourseSemester_MTM" Relationship="Self.FK_EmployeeEmployeeCourseSemester" FromRole="Employee" ToRole="EmployeeCourseSemester_MTM" />
     <NavigationProperty Name="Person" Relationship="Self.FK_PersonEmployee" FromRole="Employee" ToRole="Person" />
   </EntityType>
-  <EntityType Name="EmployeeCourse_MTM">
+  <EntityType Name="EmployeeCourseSemester_MTM">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmployeeID" Type="Int32" />
-    <Property Name="CourseID" Type="Int32" />
-    <NavigationProperty Name="Course" Relationship="Self.FK_CourseEmployeeCourse" FromRole="EmployeeCourse_MTM" ToRole="Course" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeEmployeeCourse" FromRole="EmployeeCourse_MTM" ToRole="Employee" />
-    <NavigationProperty Name="Timeslots" Relationship="Self.FK_EmployeeCourseTimeslot" FromRole="EmployeeCourse_MTM" ToRole="Timeslot" />
-  </EntityType>
-  <EntityType Name="EmployeeSemester_MTM">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="EmployeeID" Type="Int32" />
-    <Property Name="SemesterID" Type="Int32" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeCourseResult" FromRole="EmployeeSemester_MTM" ToRole="Employee" />
-    <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterCourseResult" FromRole="EmployeeSemester_MTM" ToRole="Semester" />
+    <Property Name="CourseSemesterID" Type="Int32" />
+    <NavigationProperty Name="CourseSemester_MTM" Relationship="Self.FK_CourseSemesterEmployeeCourseSemester" FromRole="EmployeeCourseSemester_MTM" ToRole="CourseSemester_MTM" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeEmployeeCourseSemester" FromRole="EmployeeCourseSemester_MTM" ToRole="Employee" />
+    <NavigationProperty Name="Timeslots" Relationship="Self.FK_EmployeeCourseSemesterTimeslot" FromRole="EmployeeCourseSemester_MTM" ToRole="Timeslot" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -108,7 +97,6 @@
     <Property Name="BatchID" Type="Int32" />
     <NavigationProperty Name="Batch" Relationship="Self.FK_BatchSemester" FromRole="Semester" ToRole="Batch" />
     <NavigationProperty Name="CourseSemester_MTM" Relationship="Self.FK_SemesterCourseSemester" FromRole="Semester" ToRole="CourseSemester_MTM" />
-    <NavigationProperty Name="EmployeeSemester_MTM" Relationship="Self.FK_SemesterCourseResult" FromRole="Semester" ToRole="EmployeeSemester_MTM" />
     <NavigationProperty Name="Students" Relationship="Self.FK_SemesterStudent" FromRole="Semester" ToRole="Student" />
     <NavigationProperty Name="Timetables" Relationship="Self.FK_SemesterTimetable" FromRole="Semester" ToRole="Timetable" />
   </EntityType>
@@ -127,17 +115,27 @@
     <NavigationProperty Name="Results" Relationship="Self.FK_StudentResult" FromRole="Student" ToRole="Result" />
     <NavigationProperty Name="Semester" Relationship="Self.FK_SemesterStudent" FromRole="Student" ToRole="Semester" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="Timeslot">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CourseEmployeeID" Type="Int32" />
+    <Property Name="EmployeeCourseSemesterID" Type="Int32" />
     <Property Name="StartTime" Type="DateTime" Precision="3" />
     <Property Name="EndTime" Type="DateTime" Precision="3" />
     <Property Name="WorkingDaysID" Type="Int32" />
     <Property Name="IsExam" Type="Boolean" />
-    <NavigationProperty Name="EmployeeCourse_MTM" Relationship="Self.FK_EmployeeCourseTimeslot" FromRole="Timeslot" ToRole="EmployeeCourse_MTM" />
+    <NavigationProperty Name="EmployeeCourseSemester_MTM" Relationship="Self.FK_EmployeeCourseSemesterTimeslot" FromRole="Timeslot" ToRole="EmployeeCourseSemester_MTM" />
     <NavigationProperty Name="TimetableTimeslot_MTM" Relationship="Self.FK_TimeslotTimetableTimeslot" FromRole="Timeslot" ToRole="TimetableTimeslot_MTM" />
     <NavigationProperty Name="WorkingDay" Relationship="Self.FK_WorkingDaysTimeslot" FromRole="Timeslot" ToRole="WorkingDays" />
   </EntityType>
@@ -228,15 +226,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CourseEmployeeCourse">
-    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
-    <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="*" />
+  <Association Name="FK_CourseSemesterEmployeeCourseSemester">
+    <End Role="CourseSemester_MTM" Type="Self.CourseSemester_MTM" Multiplicity="0..1" />
+    <End Role="EmployeeCourseSemester_MTM" Type="Self.EmployeeCourseSemester_MTM" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Course">
+      <Principal Role="CourseSemester_MTM">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="EmployeeCourse_MTM">
-        <PropertyRef Name="CourseID" />
+      <Dependent Role="EmployeeCourseSemester_MTM">
+        <PropertyRef Name="CourseSemesterID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -264,26 +262,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EmployeeCourseResult">
+  <Association Name="FK_EmployeeEmployeeCourseSemester">
     <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-    <End Role="EmployeeSemester_MTM" Type="Self.EmployeeSemester_MTM" Multiplicity="*" />
+    <End Role="EmployeeCourseSemester_MTM" Type="Self.EmployeeCourseSemester_MTM" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
         <PropertyRef Name="PersonID" />
       </Principal>
-      <Dependent Role="EmployeeSemester_MTM">
-        <PropertyRef Name="EmployeeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_EmployeeEmployeeCourse">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-    <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="PersonID" />
-      </Principal>
-      <Dependent Role="EmployeeCourse_MTM">
+      <Dependent Role="EmployeeCourseSemester_MTM">
         <PropertyRef Name="EmployeeID" />
       </Dependent>
     </ReferentialConstraint>
@@ -300,27 +286,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EmployeeCourseTimeslot">
-    <End Role="EmployeeCourse_MTM" Type="Self.EmployeeCourse_MTM" Multiplicity="0..1" />
+  <Association Name="FK_EmployeeCourseSemesterTimeslot">
+    <End Role="EmployeeCourseSemester_MTM" Type="Self.EmployeeCourseSemester_MTM" Multiplicity="0..1" />
     <End Role="Timeslot" Type="Self.Timeslot" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="EmployeeCourse_MTM">
+      <Principal Role="EmployeeCourseSemester_MTM">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Timeslot">
-        <PropertyRef Name="CourseEmployeeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SemesterCourseResult">
-    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
-    <End Role="EmployeeSemester_MTM" Type="Self.EmployeeSemester_MTM" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Semester">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="EmployeeSemester_MTM">
-        <PropertyRef Name="SemesterID" />
+        <PropertyRef Name="EmployeeCourseSemesterID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -408,18 +382,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DB11V2Entities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB11V2Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Attendances" EntityType="Self.Attendance" />
     <EntitySet Name="Batches" EntityType="Self.Batch" />
     <EntitySet Name="Courses" EntityType="Self.Course" />
     <EntitySet Name="CourseSemester_MTM" EntityType="Self.CourseSemester_MTM" />
     <EntitySet Name="Employees" EntityType="Self.Employee" />
-    <EntitySet Name="EmployeeCourse_MTM" EntityType="Self.EmployeeCourse_MTM" />
-    <EntitySet Name="EmployeeSemester_MTM" EntityType="Self.EmployeeSemester_MTM" />
+    <EntitySet Name="EmployeeCourseSemester_MTM" EntityType="Self.EmployeeCourseSemester_MTM" />
     <EntitySet Name="People" EntityType="Self.Person" />
     <EntitySet Name="Results" EntityType="Self.Result" />
     <EntitySet Name="Semesters" EntityType="Self.Semester" />
     <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Timeslots" EntityType="Self.Timeslot" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />
     <EntitySet Name="TimetableTimeslot_MTM" EntityType="Self.TimetableTimeslot_MTM" />
@@ -444,9 +418,9 @@
       <End Role="Course" EntitySet="Courses" />
       <End Role="CourseSemester_MTM" EntitySet="CourseSemester_MTM" />
     </AssociationSet>
-    <AssociationSet Name="FK_CourseEmployeeCourse" Association="Self.FK_CourseEmployeeCourse">
-      <End Role="Course" EntitySet="Courses" />
-      <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
+    <AssociationSet Name="FK_CourseSemesterEmployeeCourseSemester" Association="Self.FK_CourseSemesterEmployeeCourseSemester">
+      <End Role="CourseSemester_MTM" EntitySet="CourseSemester_MTM" />
+      <End Role="EmployeeCourseSemester_MTM" EntitySet="EmployeeCourseSemester_MTM" />
     </AssociationSet>
     <AssociationSet Name="FK_CourseSemesterResult" Association="Self.FK_CourseSemesterResult">
       <End Role="CourseSemester_MTM" EntitySet="CourseSemester_MTM" />
@@ -456,25 +430,17 @@
       <End Role="Semester" EntitySet="Semesters" />
       <End Role="CourseSemester_MTM" EntitySet="CourseSemester_MTM" />
     </AssociationSet>
-    <AssociationSet Name="FK_EmployeeCourseResult" Association="Self.FK_EmployeeCourseResult">
+    <AssociationSet Name="FK_EmployeeEmployeeCourseSemester" Association="Self.FK_EmployeeEmployeeCourseSemester">
       <End Role="Employee" EntitySet="Employees" />
-      <End Role="EmployeeSemester_MTM" EntitySet="EmployeeSemester_MTM" />
-    </AssociationSet>
-    <AssociationSet Name="FK_EmployeeEmployeeCourse" Association="Self.FK_EmployeeEmployeeCourse">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
+      <End Role="EmployeeCourseSemester_MTM" EntitySet="EmployeeCourseSemester_MTM" />
     </AssociationSet>
     <AssociationSet Name="FK_PersonEmployee" Association="Self.FK_PersonEmployee">
       <End Role="Person" EntitySet="People" />
       <End Role="Employee" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="FK_EmployeeCourseTimeslot" Association="Self.FK_EmployeeCourseTimeslot">
-      <End Role="EmployeeCourse_MTM" EntitySet="EmployeeCourse_MTM" />
+    <AssociationSet Name="FK_EmployeeCourseSemesterTimeslot" Association="Self.FK_EmployeeCourseSemesterTimeslot">
+      <End Role="EmployeeCourseSemester_MTM" EntitySet="EmployeeCourseSemester_MTM" />
       <End Role="Timeslot" EntitySet="Timeslots" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SemesterCourseResult" Association="Self.FK_SemesterCourseResult">
-      <End Role="Semester" EntitySet="Semesters" />
-      <End Role="EmployeeSemester_MTM" EntitySet="EmployeeSemester_MTM" />
     </AssociationSet>
     <AssociationSet Name="FK_PersonStudent" Association="Self.FK_PersonStudent">
       <End Role="Person" EntitySet="People" />

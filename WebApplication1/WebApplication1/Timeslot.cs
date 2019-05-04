@@ -21,13 +21,13 @@ namespace WebApplication1
         }
     
         public int ID { get; set; }
-        public Nullable<int> CourseEmployeeID { get; set; }
+        public Nullable<int> EmployeeCourseSemesterID { get; set; }
         public Nullable<System.DateTime> StartTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
         public Nullable<int> WorkingDaysID { get; set; }
         public Nullable<bool> IsExam { get; set; }
     
-        public virtual EmployeeCourse_MTM EmployeeCourse_MTM { get; set; }
+        public virtual EmployeeCourseSemester_MTM EmployeeCourseSemester_MTM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimetableTimeslot_MTM> TimetableTimeslot_MTM { get; set; }
         public virtual WorkingDay WorkingDay { get; set; }

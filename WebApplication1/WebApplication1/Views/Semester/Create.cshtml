@@ -1,10 +1,8 @@
-﻿@model IEnumerable<WebApplication1.Course>
+﻿@model WebApplication1.CourseSemester_MTM
 
 @{
     ViewBag.Title = "Create";
 }
-
-
 
 <h2>Create</h2>
 
@@ -12,98 +10,69 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        @Html.ActionLink("Create New", "Create", "Batch")
-        @*<div class="dropdown">
-
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                --Select Course--
-                <span class="caret"></span>
-            </button>
-
-            <ul class="dropdown-menu">
-                <li><a href="#">Item1</a></li>
-                <li><a href="#">Item2</a></li>
-                <li><a href="#">Item3</a></li>
-            </ul>
-        </div>*@
-        <select id="Batch" class="form-control">
+        <div class="form-group">
+            <dl class="dl-horizontal">
+                <dt>Batch</dt>
+                <dd>@ViewBag.batch</dd>
+                <dt>Semester</dt>
+                <dd>@ViewBag.semester</dd>
+            </dl>
+        </div>
+        <select id="selectCourse" name="CourseID" class="form-control" >
             <option></option>
         </select>
-        <br>
-        <select id="Semester" class="form-control">
-            <option></option>
-        </select>
-        <br />
-        <select id="Course" class="form-control">
-            <option></option>
+        <select name="SemesterID" class="form-control" style="display: none;">
+            <option value="@ViewBag.semesterID">@ViewBag.semesterID</option>
         </select>
         <div class="form-group">
             <div class="col-md-10">
-                <input type="submit" value="Submit" class="btn btn-default" />
+                <input @*id="btnCreate"*@ type="submit" value="Add Course" class="btn btn-default" />
             </div>
+        </div>
+        @{ if (ViewBag.color == "green")
+            {
+                <div class="alert alert-success">
+                    <strong>Success!</strong> @ViewBag.message
+                </div>
+            }
+            else if (ViewBag.color == "red")
+            {
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> @ViewBag.message
+                </div>
+            }
+        }
+        <div>
+            @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
 }
 
-
-@section Scripts{
-    <script type="text/javascript">
-        $(document).ready(function (e){
-            var d = {};
-            d.url = '@Url.Action("LoadBatches", "Semester")';
-            d.type = "POST";
-            d.dataType = "json";
-            d.contentType = "application/json";
-            d.success = function (r) {
-                $("#Batch").empty();
-                $("#Batch").prepend("option value='' selected='selected'></option>");
-                for (var i = 0; i < r.length; i++) {
-                    $("#Batch").append('<option value="' + r[i].ID + '">' + r[i].Name + '</option>');
-                }
-            };
-            $.ajax(d);
-        });
-    </script>
-<script type="text/javascript">
-        $(document).ready(function (e){
-            var d = {};
-            d.url = '@Url.Action("LoadCourses", "Semester")';
-            d.type = "POST";
-            d.dataType = "json";
-            d.contentType = "application/json";
-            d.success = function (r) {
-                $("#Course").empty();
-                $("#Course").prepend("option value='' selected='selected'></option>");
-                for (var i = 0; i < r.length; i++) {
-                    $("#Course").append('<option value="' + r[i].ID + '">' + r[i].Name + '</option>');
-                }
-            };
-            $.ajax(d);
-        });
-</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#Batch").change(function () {
-                debugger;
-                event.preventDefault();
-                var selectedValue = $("#Batch").select();
-                var $url = '/Semester/LoadSemester';
-                //alert($url);
-
-                $.ajax({
-                    url: $url,
-                    type: 'POST',
-                    datatype: "json",
-                    data: "Item=" + $("#Batch option:selected").val(),
-                    success: function (r) {
-                        $("#Semester").empty();
-                        $("#Semester").prepend("option value='' selected='selected'></option>");
-                        for (var i = 0; i < r.length; i++) {
-                            $("#Semester").append('<option value="' + r[i].ID + '">' + r[i].Name + '</option>');
-                        }
-                    }
-                });
-            });
+            getCourses();
         });
+        $("#btnCreate").click(function () {
+            window.location = "/Semester/Create?id=" + $("#Semester").val() + "&cid=" + $("#selectCourse option:selected").val();
+        });
+
+        function getCourses()
+        {
+            var d = {};
+            d.url = '@Url.Action("LoadAllCourses", "Semester")';
+            d.type = "POST";
+            d.dataType = "json";
+            d.contentType = "application/json";
+            d.success = function (r) {
+                $("#selectCourse").empty();
+                $("#selectCourse").prepend("option value='' selected='selected'></option>");
+                for (var i = 0; i < r.length; i++) {
+                    $("#selectCourse").append('<option value="' + r[i].ID + '">' + r[i].Name + '</option>');
+                }
+            };
+            $.ajax(d);
+        }
     </script>
 }

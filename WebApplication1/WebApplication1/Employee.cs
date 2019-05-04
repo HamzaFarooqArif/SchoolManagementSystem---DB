@@ -17,8 +17,7 @@ namespace WebApplication1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.EmployeeSemester_MTM = new HashSet<EmployeeSemester_MTM>();
-            this.EmployeeCourse_MTM = new HashSet<EmployeeCourse_MTM>();
+            this.EmployeeCourseSemester_MTM = new HashSet<EmployeeCourseSemester_MTM>();
         }
     
         public int PersonID { get; set; }
@@ -26,9 +25,7 @@ namespace WebApplication1
         public string Salary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeSemester_MTM> EmployeeSemester_MTM { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeCourse_MTM> EmployeeCourse_MTM { get; set; }
+        public virtual ICollection<EmployeeCourseSemester_MTM> EmployeeCourseSemester_MTM { get; set; }
         public virtual Person Person { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
         // GET: Course
         public ActionResult Index()
         {
-            DB11V2Entities1 db = new DB11V2Entities1();
+            DB11V2Entities db = new DB11V2Entities();
             List<Course> result = db.Courses.ToList();
             return View(result);
         }
@@ -34,17 +34,16 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Create(CourseViewModels collection)
         {
-             
-           bool result = CourseAction.Create(collection);
+            bool result = CourseAction.Create(collection);
             if (result)
             {
                 ViewBag.color = "green";
-                ViewBag.message = "Batch Added Successfully";
+                ViewBag.message = "Course Added Successfully";
             }
             else
             {
                 ViewBag.color = "red";
-                ViewBag.message = "Batch Already Exists";
+                ViewBag.message = "Course Already Exists";
             }
             return View();
         }
@@ -52,7 +51,13 @@ namespace WebApplication1.Controllers
         // GET: Course/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            DB11V2Entities db = new DB11V2Entities();
+            Course cr = db.Courses.Where(c => c.ID == id).FirstOrDefault();
+
+            CourseViewModels crm = new CourseViewModels();
+            crm.CourseName = cr.Name;
+
+            return View(crm);
         }
 
         // POST: Course/Edit/5
@@ -67,7 +72,7 @@ namespace WebApplication1.Controllers
             else
             {
                 ViewBag.color = "red";
-                ViewBag.message = "Batch Already Exists";
+                ViewBag.message = "Course Already Exists";
                 return View();
             }
         }
@@ -75,7 +80,13 @@ namespace WebApplication1.Controllers
         // GET: Course/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            DB11V2Entities db = new DB11V2Entities();
+            Course cr = db.Courses.Where(c => c.ID == id).FirstOrDefault();
+
+            CourseViewModels crm = new CourseViewModels();
+            crm.CourseName = cr.Name;
+
+            return View(crm);
         }
 
         // POST: Course/Delete/5
@@ -84,13 +95,20 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
+                CourseAction.Delete(id);
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                DB11V2Entities db = new DB11V2Entities();
+                Course cr = db.Courses.Where(c => c.ID == id).FirstOrDefault();
+
+                CourseViewModels crm = new CourseViewModels();
+                crm.CourseName = cr.Name;
+
+                ViewBag.color = "red";
+                ViewBag.message = "Can't Delete";
+                return View(crm);
             }
         }
     }

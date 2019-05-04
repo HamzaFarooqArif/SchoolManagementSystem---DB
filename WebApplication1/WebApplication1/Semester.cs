@@ -18,7 +18,6 @@ namespace WebApplication1
         public Semester()
         {
             this.CourseSemester_MTM = new HashSet<CourseSemester_MTM>();
-            this.EmployeeSemester_MTM = new HashSet<EmployeeSemester_MTM>();
             this.Students = new HashSet<Student>();
             this.Timetables = new HashSet<Timetable>();
         }
@@ -30,8 +29,6 @@ namespace WebApplication1
         public virtual Batch Batch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseSemester_MTM> CourseSemester_MTM { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeSemester_MTM> EmployeeSemester_MTM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

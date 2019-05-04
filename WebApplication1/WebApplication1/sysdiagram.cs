@@ -12,13 +12,12 @@ namespace WebApplication1
     using System;
     using System.Collections.Generic;
     
-    public partial class EmployeeSemester_MTM
+    public partial class sysdiagram
     {
-        public int ID { get; set; }
-        public Nullable<int> EmployeeID { get; set; }
-        public Nullable<int> SemesterID { get; set; }
-    
-        public virtual Employee Employee { get; set; }
-        public virtual Semester Semester { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

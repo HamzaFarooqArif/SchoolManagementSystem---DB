@@ -22,8 +22,8 @@ namespace WebApplication1
         }
     
         public int PersonID { get; set; }
-        public int SemesterID { get; set; }
-        public int BatchID { get; set; }
+        public Nullable<int> SemesterID { get; set; }
+        public Nullable<int> BatchID { get; set; }
         public string RegNo { get; set; }
         public string Fee { get; set; }
     
