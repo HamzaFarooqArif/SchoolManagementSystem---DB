@@ -137,5 +137,124 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UP_BatchWiseAttendaceReport" FunctionName="DB11V2Model.Store.UP_BatchWiseAttendaceReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_BatchWiseAttendaceReport_Result">
+          <ScalarProperty Name="Registration" ColumnName="Registration" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UP_BatchWiseResultReport" FunctionName="DB11V2Model.Store.UP_BatchWiseResultReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_BatchWiseResultReport_Result">
+          <ScalarProperty Name="Registration" ColumnName="Registration" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UP_BatchWiseStudentReport" FunctionName="DB11V2Model.Store.UP_BatchWiseStudentReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_BatchWiseStudentReport_Result">
+          <ScalarProperty Name="Registration" ColumnName="Registration" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UP_CourseWiseEmployeeReport" FunctionName="DB11V2Model.Store.UP_CourseWiseEmployeeReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_CourseWiseEmployeeReport_Result">
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UP_CourseWiseResultReport" FunctionName="DB11V2Model.Store.UP_CourseWiseResultReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_CourseWiseResultReport_Result">
+          <ScalarProperty Name="Registration" ColumnName="Registration" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UP_CourseWiseStudentReport" FunctionName="DB11V2Model.Store.UP_CourseWiseStudentReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_CourseWiseStudentReport_Result">
+          <ScalarProperty Name="Registration" ColumnName="Registration" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UP_SalaryReport" FunctionName="DB11V2Model.Store.UP_SalaryReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_SalaryReport_Result">
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="MonthlySalary" ColumnName="MonthlySalary" />
+          <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+          <ScalarProperty Name="ServiceYears" ColumnName="ServiceYears" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UP_SemesterWiseAttendaceReport" FunctionName="DB11V2Model.Store.UP_SemesterWiseAttendaceReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_SemesterWiseAttendaceReport_Result">
+          <ScalarProperty Name="Registration" ColumnName="Registration" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UP_SemesterWiseEmployeeReport" FunctionName="DB11V2Model.Store.UP_SemesterWiseEmployeeReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_SemesterWiseEmployeeReport_Result">
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Batch" ColumnName="Batch" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UP_StudentFeeReport" FunctionName="DB11V2Model.Store.UP_StudentFeeReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB11V2Model.UP_StudentFeeReport_Result">
+          <ScalarProperty Name="Registration" ColumnName="Registration" />
+          <ScalarProperty Name="MonthlyFee" ColumnName="MonthlyFee" />
+          <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

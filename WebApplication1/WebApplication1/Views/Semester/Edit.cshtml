@@ -3,14 +3,17 @@
 @{
     ViewBag.Title = "Edit";
 }
-<h1>Edit Semester Courses</h1>
+
+<br>
+<br>
+<h2>Edit Semester Courses</h2>
 <hr>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <div class="form-group">
-            <label class="control-label col-md-2">Course</label>
+            <label class="control-label col-md-2">Batch</label>
             <div class="col-md-10">
                 <select id="Course" name="ID" class="form-control" style="float: left;">
                     <option></option>

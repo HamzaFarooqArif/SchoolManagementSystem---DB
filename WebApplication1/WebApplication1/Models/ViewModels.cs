@@ -103,11 +103,19 @@ namespace WebApplication1.Models
     {
         public int ID { get; set; }
         public string ReportName { get; set; }
+        public string param { get; set; }
 
         public ReportViewModels(int id, string ReportName)
         {
             this.ID = id;
             this.ReportName = ReportName;
+        }
+
+        public ReportViewModels()
+        {
+            this.ID = 0;
+            this.ReportName = "";
+
         }
     }
 }

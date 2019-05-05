@@ -12,6 +12,8 @@ namespace WebApplication1
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DB11V2Entities : DbContext
     {
@@ -39,5 +41,87 @@ namespace WebApplication1
         public virtual DbSet<Timetable> Timetables { get; set; }
         public virtual DbSet<TimetableTimeslot_MTM> TimetableTimeslot_MTM { get; set; }
         public virtual DbSet<WorkingDay> WorkingDays { get; set; }
+    
+        public virtual ObjectResult<UP_BatchWiseAttendaceReport_Result> UP_BatchWiseAttendaceReport(string batch)
+        {
+            var batchParameter = batch != null ?
+                new ObjectParameter("Batch", batch) :
+                new ObjectParameter("Batch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_BatchWiseAttendaceReport_Result>("UP_BatchWiseAttendaceReport", batchParameter);
+        }
+    
+        public virtual ObjectResult<UP_BatchWiseResultReport_Result> UP_BatchWiseResultReport(string batch)
+        {
+            var batchParameter = batch != null ?
+                new ObjectParameter("Batch", batch) :
+                new ObjectParameter("Batch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_BatchWiseResultReport_Result>("UP_BatchWiseResultReport", batchParameter);
+        }
+    
+        public virtual ObjectResult<UP_BatchWiseStudentReport_Result> UP_BatchWiseStudentReport(string batch)
+        {
+            var batchParameter = batch != null ?
+                new ObjectParameter("Batch", batch) :
+                new ObjectParameter("Batch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_BatchWiseStudentReport_Result>("UP_BatchWiseStudentReport", batchParameter);
+        }
+    
+        public virtual ObjectResult<UP_CourseWiseEmployeeReport_Result> UP_CourseWiseEmployeeReport(string course)
+        {
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_CourseWiseEmployeeReport_Result>("UP_CourseWiseEmployeeReport", courseParameter);
+        }
+    
+        public virtual ObjectResult<UP_CourseWiseResultReport_Result> UP_CourseWiseResultReport(string course)
+        {
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_CourseWiseResultReport_Result>("UP_CourseWiseResultReport", courseParameter);
+        }
+    
+        public virtual ObjectResult<UP_CourseWiseStudentReport_Result> UP_CourseWiseStudentReport(string course)
+        {
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_CourseWiseStudentReport_Result>("UP_CourseWiseStudentReport", courseParameter);
+        }
+    
+        public virtual ObjectResult<UP_SalaryReport_Result> UP_SalaryReport()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_SalaryReport_Result>("UP_SalaryReport");
+        }
+    
+        public virtual ObjectResult<UP_SemesterWiseAttendaceReport_Result> UP_SemesterWiseAttendaceReport(string semester)
+        {
+            var semesterParameter = semester != null ?
+                new ObjectParameter("Semester", semester) :
+                new ObjectParameter("Semester", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_SemesterWiseAttendaceReport_Result>("UP_SemesterWiseAttendaceReport", semesterParameter);
+        }
+    
+        public virtual ObjectResult<UP_SemesterWiseEmployeeReport_Result> UP_SemesterWiseEmployeeReport(string semester)
+        {
+            var semesterParameter = semester != null ?
+                new ObjectParameter("Semester", semester) :
+                new ObjectParameter("Semester", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_SemesterWiseEmployeeReport_Result>("UP_SemesterWiseEmployeeReport", semesterParameter);
+        }
+    
+        public virtual ObjectResult<UP_StudentFeeReport_Result> UP_StudentFeeReport()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UP_StudentFeeReport_Result>("UP_StudentFeeReport");
+        }
     }
 }

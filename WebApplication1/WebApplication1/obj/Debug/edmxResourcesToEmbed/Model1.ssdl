@@ -366,6 +366,32 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="UP_BatchWiseAttendaceReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Batch" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UP_BatchWiseResultReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Batch" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UP_BatchWiseStudentReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Batch" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UP_CourseWiseEmployeeReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Course" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UP_CourseWiseResultReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Course" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UP_CourseWiseStudentReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Course" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UP_SalaryReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UP_SemesterWiseAttendaceReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Semester" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UP_SemesterWiseEmployeeReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Semester" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UP_StudentFeeReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="DB11V2ModelStoreContainer">
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Batch" EntityType="Self.Batch" Schema="dbo" store:Type="Tables" />

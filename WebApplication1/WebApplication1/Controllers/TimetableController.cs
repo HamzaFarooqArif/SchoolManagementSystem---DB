@@ -166,15 +166,15 @@ namespace WebApplication1.Controllers
             }));
         }
 
-        public JsonResult LoadTimetables(int IsDateSheet, int batchId)
+        public JsonResult LoadTimetables(int isDatesheet, int batchId)
         {
             DB11V2Entities db = new DB11V2Entities();
             //IEnumerable<GetProducts_Result> res = db.GetProducts();
             List<Semester> semesterList = db.Semesters.Where(temp => temp.BatchID == batchId).ToList();
             List<Timetable> res = new List<Timetable>();
             bool ind = false;
-            if (IsDateSheet == 0) ind = false;
-            if (IsDateSheet == 1) ind = true;
+            if (isDatesheet == 0) ind = false;
+            if (isDatesheet == 1) ind = true;
 
             foreach(Semester sm in semesterList)
             {
@@ -445,9 +445,8 @@ namespace WebApplication1.Controllers
                     return View();
                 }
             }
-            catch(Exception e)
+            catch
             {
-                throw (e);
                 ViewBag.color = "red";
                 ViewBag.message = "Exception Catched";
                 return View();

@@ -489,5 +489,110 @@
       <End Role="Timetable" EntitySet="Timetables" />
       <End Role="TimetableTimeslot_MTM" EntitySet="TimetableTimeslot_MTM" />
     </AssociationSet>
+    <FunctionImport Name="UP_BatchWiseAttendaceReport" ReturnType="Collection(DB11V2Model.UP_BatchWiseAttendaceReport_Result)">
+      <Parameter Name="Batch" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UP_BatchWiseResultReport" ReturnType="Collection(DB11V2Model.UP_BatchWiseResultReport_Result)">
+      <Parameter Name="Batch" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UP_BatchWiseStudentReport" ReturnType="Collection(DB11V2Model.UP_BatchWiseStudentReport_Result)">
+      <Parameter Name="Batch" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UP_CourseWiseEmployeeReport" ReturnType="Collection(DB11V2Model.UP_CourseWiseEmployeeReport_Result)">
+      <Parameter Name="Course" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UP_CourseWiseResultReport" ReturnType="Collection(DB11V2Model.UP_CourseWiseResultReport_Result)">
+      <Parameter Name="Course" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UP_CourseWiseStudentReport" ReturnType="Collection(DB11V2Model.UP_CourseWiseStudentReport_Result)">
+      <Parameter Name="Course" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UP_SalaryReport" ReturnType="Collection(DB11V2Model.UP_SalaryReport_Result)" />
+    <FunctionImport Name="UP_SemesterWiseAttendaceReport" ReturnType="Collection(DB11V2Model.UP_SemesterWiseAttendaceReport_Result)">
+      <Parameter Name="Semester" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UP_SemesterWiseEmployeeReport" ReturnType="Collection(DB11V2Model.UP_SemesterWiseEmployeeReport_Result)">
+      <Parameter Name="Semester" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UP_StudentFeeReport" ReturnType="Collection(DB11V2Model.UP_StudentFeeReport_Result)" />
   </EntityContainer>
+  <ComplexType Name="UP_BatchWiseAttendaceReport_Result">
+    <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Course" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="UP_BatchWiseResultReport_Result">
+    <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+    <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="String" Name="Course" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="UP_BatchWiseStudentReport_Result">
+    <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="UP_CourseWiseEmployeeReport_Result">
+    <Property Type="String" Name="Designation" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Salary" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="UP_CourseWiseResultReport_Result">
+    <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+    <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="UP_CourseWiseStudentReport_Result">
+    <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="UP_SalaryReport_Result">
+    <Property Type="String" Name="Designation" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="MonthlySalary" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="TotalPaid" Nullable="true" />
+    <Property Type="Int32" Name="ServiceYears" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="UP_SemesterWiseAttendaceReport_Result">
+    <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Course" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="UP_SemesterWiseEmployeeReport_Result">
+    <Property Type="String" Name="Designation" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Salary" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Course" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Batch" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="UP_StudentFeeReport_Result">
+    <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="MonthlyFee" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="TotalPaid" Nullable="true" />
+    <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+  </ComplexType>
 </Schema>

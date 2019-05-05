@@ -4,14 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-
-<h1>Employee Index</h1>
+<br>
+<br>
+<h2>Employee Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-bordered">
-    <thead class="thead-dark">
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -36,7 +36,6 @@
         </th>
         <th></th>
     </tr>
-        </thead>
 
 @foreach (var item in Model) {
     <tr>

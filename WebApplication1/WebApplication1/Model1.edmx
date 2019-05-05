@@ -371,6 +371,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="UP_BatchWiseAttendaceReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Batch" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UP_BatchWiseResultReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Batch" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UP_BatchWiseStudentReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Batch" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UP_CourseWiseEmployeeReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Course" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UP_CourseWiseResultReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Course" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UP_CourseWiseStudentReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Course" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UP_SalaryReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UP_SemesterWiseAttendaceReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Semester" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UP_SemesterWiseEmployeeReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Semester" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UP_StudentFeeReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DB11V2ModelStoreContainer">
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Batch" EntityType="Self.Batch" Schema="dbo" store:Type="Tables" />
@@ -953,7 +979,112 @@
             <End Role="Timetable" EntitySet="Timetables" />
             <End Role="TimetableTimeslot_MTM" EntitySet="TimetableTimeslot_MTM" />
           </AssociationSet>
+          <FunctionImport Name="UP_BatchWiseAttendaceReport" ReturnType="Collection(DB11V2Model.UP_BatchWiseAttendaceReport_Result)">
+            <Parameter Name="Batch" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UP_BatchWiseResultReport" ReturnType="Collection(DB11V2Model.UP_BatchWiseResultReport_Result)">
+            <Parameter Name="Batch" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UP_BatchWiseStudentReport" ReturnType="Collection(DB11V2Model.UP_BatchWiseStudentReport_Result)">
+            <Parameter Name="Batch" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UP_CourseWiseEmployeeReport" ReturnType="Collection(DB11V2Model.UP_CourseWiseEmployeeReport_Result)">
+            <Parameter Name="Course" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UP_CourseWiseResultReport" ReturnType="Collection(DB11V2Model.UP_CourseWiseResultReport_Result)">
+            <Parameter Name="Course" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UP_CourseWiseStudentReport" ReturnType="Collection(DB11V2Model.UP_CourseWiseStudentReport_Result)">
+            <Parameter Name="Course" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UP_SalaryReport" ReturnType="Collection(DB11V2Model.UP_SalaryReport_Result)" />
+          <FunctionImport Name="UP_SemesterWiseAttendaceReport" ReturnType="Collection(DB11V2Model.UP_SemesterWiseAttendaceReport_Result)">
+            <Parameter Name="Semester" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UP_SemesterWiseEmployeeReport" ReturnType="Collection(DB11V2Model.UP_SemesterWiseEmployeeReport_Result)">
+            <Parameter Name="Semester" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UP_StudentFeeReport" ReturnType="Collection(DB11V2Model.UP_StudentFeeReport_Result)" />
         </EntityContainer>
+        <ComplexType Name="UP_BatchWiseAttendaceReport_Result">
+          <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Course" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="UP_BatchWiseResultReport_Result">
+          <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="String" Name="Course" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UP_BatchWiseStudentReport_Result">
+          <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="UP_CourseWiseEmployeeReport_Result">
+          <Property Type="String" Name="Designation" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Salary" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="UP_CourseWiseResultReport_Result">
+          <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UP_CourseWiseStudentReport_Result">
+          <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="UP_SalaryReport_Result">
+          <Property Type="String" Name="Designation" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MonthlySalary" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="TotalPaid" Nullable="true" />
+          <Property Type="Int32" Name="ServiceYears" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="UP_SemesterWiseAttendaceReport_Result">
+          <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Course" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="UP_SemesterWiseEmployeeReport_Result">
+          <Property Type="String" Name="Designation" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Salary" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Course" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Batch" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="UP_StudentFeeReport_Result">
+          <Property Type="String" Name="Registration" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MonthlyFee" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="TotalPaid" Nullable="true" />
+          <Property Type="String" Name="Semester" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="20" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1096,6 +1227,125 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UP_BatchWiseAttendaceReport" FunctionName="DB11V2Model.Store.UP_BatchWiseAttendaceReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_BatchWiseAttendaceReport_Result">
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UP_BatchWiseResultReport" FunctionName="DB11V2Model.Store.UP_BatchWiseResultReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_BatchWiseResultReport_Result">
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UP_BatchWiseStudentReport" FunctionName="DB11V2Model.Store.UP_BatchWiseStudentReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_BatchWiseStudentReport_Result">
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UP_CourseWiseEmployeeReport" FunctionName="DB11V2Model.Store.UP_CourseWiseEmployeeReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_CourseWiseEmployeeReport_Result">
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UP_CourseWiseResultReport" FunctionName="DB11V2Model.Store.UP_CourseWiseResultReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_CourseWiseResultReport_Result">
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UP_CourseWiseStudentReport" FunctionName="DB11V2Model.Store.UP_CourseWiseStudentReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_CourseWiseStudentReport_Result">
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UP_SalaryReport" FunctionName="DB11V2Model.Store.UP_SalaryReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_SalaryReport_Result">
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="MonthlySalary" ColumnName="MonthlySalary" />
+                <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+                <ScalarProperty Name="ServiceYears" ColumnName="ServiceYears" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UP_SemesterWiseAttendaceReport" FunctionName="DB11V2Model.Store.UP_SemesterWiseAttendaceReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_SemesterWiseAttendaceReport_Result">
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UP_SemesterWiseEmployeeReport" FunctionName="DB11V2Model.Store.UP_SemesterWiseEmployeeReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_SemesterWiseEmployeeReport_Result">
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UP_StudentFeeReport" FunctionName="DB11V2Model.Store.UP_StudentFeeReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB11V2Model.UP_StudentFeeReport_Result">
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="MonthlyFee" ColumnName="MonthlyFee" />
+                <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
